@@ -6,12 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="290" Height="712">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="290" Height="712" MinWidth="290">
 
     <Grid x:Name="MainLayout">
         <Rectangle x:Name="MainBg" Stroke="Black" Fill="#FF232323"/>
         <ScrollViewer Margin="0,0,0,120">
-            <StackPanel x:Name="TaskList" Padding="0,2,0,2" Height="712" Width="290">
+            <StackPanel x:Name="TaskList" Padding="0,2,0,2" Height="712">
                 <local:Task Height="68"/>
                 <local:Task Height="68"/>
                 <local:Task Height="68"/>
