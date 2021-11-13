@@ -10,18 +10,20 @@
 
     <Grid x:Name="MainLayout">
         <Rectangle x:Name="MainBg" Stroke="Black" Fill="#FF232323"/>
-        <StackPanel x:Name="TaskList" Padding="0,2,0,2" Margin="0,0,0,120">
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-            <local:Task Height="68"/>
-        </StackPanel>
+        <ScrollViewer Margin="0,0,0,120">
+            <StackPanel x:Name="TaskList" Padding="0,2,0,2" Height="712" Width="290">
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+                <local:Task Height="68"/>
+            </StackPanel>
+        </ScrollViewer>
         <Grid x:Name="FooterLayout" VerticalAlignment="Bottom" Height="119" Margin="0,592,0,0">
             <TextBlock x:Name="textBlock" Text="Total" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,92"/>
             <TextBlock x:Name="totalTime" Text="(7.2) 07:12:02" TextWrapping="Wrap" Margin="19,0,0,64" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Consolas" FontSize="18" SelectionChanged="textBlock_SelectionChanged"/>
