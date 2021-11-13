@@ -26,5 +26,10 @@ namespace Task_Time_Counter_2
         {
             this.InitializeComponent();
         }
+
+        private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

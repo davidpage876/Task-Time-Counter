@@ -5,7 +5,7 @@
     xmlns:local="using:Task_Time_Counter_2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Width="280" Height="68">
+    mc:Ignorable="d" Margin="4,2,4,2">
 
     <Grid x:Name="Layout">
         <Grid.RowDefinitions>
@@ -15,7 +15,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Rectangle x:Name="PanelBg" Stroke="White" StrokeThickness="2" Fill="#FFB95656" Grid.RowSpan="2"/>
+        <Rectangle x:Name="PanelBg" Grid.RowSpan="2">
+            <Rectangle.Fill>
+                <AcrylicBrush TintColor="#FFC33838" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FFB84C4C"/>
+            </Rectangle.Fill>
+        </Rectangle>
         <Button x:Name="ToTopBtn" Content="&#xE11C;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="60" Grid.RowSpan="2" Margin="218,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Right"/>
         <Button x:Name="PlayPauseBtn" Content="&#xEDB5;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="60" Grid.RowSpan="2" Margin="218,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Visibility="Collapsed"/>
         <Button x:Name="NameBtn" Content="Unnamed Task" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,65,0" FontSize="16" Padding="10,0,10,0" Background="{x:Null}" HorizontalContentAlignment="Left"/>
