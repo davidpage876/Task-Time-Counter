@@ -32,18 +32,14 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="Task_Time_Counter_2.App">
       <uap:VisualElements
-        DisplayName="Task Time Counter 2"
+        DisplayName="Task Time Counter"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Task Time Counter 2"
+        Description="Task Time Counter"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
-
-  <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
 </Package>
