@@ -4,4 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Task_Time_Counter_2">
 
+    <Application.Resources>
+        <AcrylicBrush x:Key="taskRed" TintColor="#FFC33838" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FFB84C4C"/>
+        <AcrylicBrush x:Key="taskGreen" TintColor="#FF21A840" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF5AB85A"/>
+        <AcrylicBrush x:Key="taskBlue" TintColor="#FF0060BF" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF3F7AC1"/>
+        <AcrylicBrush x:Key="taskYellow" TintColor="#FFD1CA3F" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FFCFC670"/>
+        <AcrylicBrush x:Key="taskPurple" TintColor="#FF5E38C3" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF7355B6"/>
+        <AcrylicBrush x:Key="taskCyan" TintColor="#FF22C0C7" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF5CC4C9"/>
+        <AcrylicBrush x:Key="taskOrange" TintColor="#FFD47A1D" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FFC39154"/>
+        <AcrylicBrush x:Key="taskPink" TintColor="#FFBD38C3" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FFB163B9"/>
+        <AcrylicBrush x:Key="taskTeal" TintColor="#FF38C384" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF63B99E"/>
+        <AcrylicBrush x:Key="taskGrey" TintColor="#FF424242" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF535353"/>
+    </Application.Resources>
+
 </Application>
