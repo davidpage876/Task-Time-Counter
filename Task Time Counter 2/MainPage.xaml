@@ -12,16 +12,16 @@
         <Rectangle x:Name="MainBg" Stroke="Black" Fill="#FF232323"/>
         <ScrollViewer Margin="0,0,0,120">
             <StackPanel x:Name="TaskList" Padding="0,2,0,2" Height="712">
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
-                <local:Task Height="68"/>
+                <local:Task x:Name="Task00" Height="68"/>
+                <local:Task x:Name="Task01" Height="68"/>
+                <local:Task x:Name="Task02" Height="68"/>
+                <local:Task x:Name="Task03" Height="68"/>
+                <local:Task x:Name="Task04" Height="68"/>
+                <local:Task x:Name="Task05" Height="68"/>
+                <local:Task x:Name="Task06" Height="68"/>
+                <local:Task x:Name="Task08" Height="68"/>
+                <local:Task x:Name="Task09" Height="68"/>
+                <local:Task x:Name="Task10" Height="68"/>
             </StackPanel>
         </ScrollViewer>
         <Grid x:Name="FooterLayout" VerticalAlignment="Bottom" Height="119" Margin="0,592,0,0">
