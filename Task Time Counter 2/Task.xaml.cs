@@ -184,25 +184,12 @@ namespace Task_Time_Counter_2
 
         private void UpdateTimerUI()
         {
-            timeBtn.Content = FormatTimeLong(Time);
+            timeBtn.Content = App.FormatTimeLong(Time);
         }
 
         private void OnTimerTick(object sender, object e)
         {
             UpdateTimerUI();
-        }
-
-        private string FormatTimeLong(TimeSpan elapsed)
-        {
-            return string.Format("({0}) {1:00}:{2:00}:{3:00}.{4:0}",
-                Math.Round(elapsed.TotalHours, 1),
-                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
-        }
-
-        private string FormatTimeShort(TimeSpan elapsed)
-        {
-            return string.Format("{0:00}:{1:00}:{2:00}.{3:0}",
-                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
         }
 
         private void OpenEditName()
@@ -243,7 +230,7 @@ namespace Task_Time_Counter_2
             isEditingTime = true;
 
             // Set the edit field time to match the current text.
-            timeEdit.Text = FormatTimeShort(Time);
+            timeEdit.Text = App.FormatTimeShort(Time);
 
             // Open the edit field and focus on it.
             timeBtn.Visibility = Visibility.Collapsed;

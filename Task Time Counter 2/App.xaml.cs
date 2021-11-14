@@ -23,7 +23,29 @@ namespace Task_Time_Counter_2
     /// </summary>
     sealed partial class App : Application
     {
+        private DispatcherTimer dispatchTimer;
+        private TextBlock totalTime;
+
         StackPanel taskList;
+
+        /// <summary>
+        /// Formats the given time in long format: "(numeric hours) HH:MM:SS.S".
+        /// </summary>
+        public static string FormatTimeLong(TimeSpan elapsed)
+        {
+            return string.Format("({0}) {1:00}:{2:00}:{3:00}.{4:0}",
+                Math.Round(elapsed.TotalHours, 1),
+                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
+        }
+
+        /// <summary>
+        /// Formats the given time in short format: "HH:MM:SS.S".
+        /// </summary>
+        public static string FormatTimeShort(TimeSpan elapsed)
+        {
+            return string.Format("{0:00}:{1:00}:{2:00}.{3:0}",
+                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
+        }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -41,12 +63,20 @@ namespace Task_Time_Counter_2
         /// <param name="pg">The main page of the app.</param>
         public void InitializeUI(MainPage mainUI)
         {
+            // Get control references.
+            totalTime = mainUI.FindName("TotalTime") as TextBlock;
             taskList = mainUI.FindName("TaskList") as StackPanel;
             UIElementCollection tasks = taskList.Children;
 
             // Enable play button on first task.
             Task t01 = tasks.ElementAt(0) as Task;
             t01.Active = true;
+
+            // Set up dispatch timer for updating UI.
+            dispatchTimer = new DispatcherTimer();
+            dispatchTimer.Tick += OnTimerTick;
+            dispatchTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatchTimer.Start();
         }
 
         /// <summary>
@@ -69,6 +99,17 @@ namespace Task_Time_Counter_2
             {
                 task.ResetName();
             }
+        }
+
+        private void OnTimerTick(object sender, object e)
+        {
+            // Update total time.
+            TimeSpan total = TimeSpan.Zero;
+            foreach (Task task in taskList.Children)
+            {
+                total += task.Time;
+            }
+            totalTime.Text = FormatTimeLong(total);
         }
 
         /// <summary>

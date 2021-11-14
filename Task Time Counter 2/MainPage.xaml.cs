@@ -34,11 +34,6 @@ namespace Task_Time_Counter_2
             app.InitializeUI(this);
         }
 
-        private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void OnClearTimesTapped(object sender, TappedRoutedEventArgs e)
         {
             app.ClearTaskTimes();
