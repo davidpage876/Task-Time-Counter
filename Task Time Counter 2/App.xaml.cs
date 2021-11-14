@@ -69,16 +69,7 @@ namespace Task_Time_Counter_2
             UIElementCollection tasks = taskList.Children;
 
             // Set each task's background fill.
-            AssignTaskFill(0, "taskOrange");
-            AssignTaskFill(1, "taskRed");
-            AssignTaskFill(2, "taskPink");
-            AssignTaskFill(3, "taskPurple");
-            AssignTaskFill(4, "taskBlue");
-            AssignTaskFill(5, "taskCyan");
-            AssignTaskFill(6, "taskYellowGreen");
-            AssignTaskFill(7, "taskGreen");
-            AssignTaskFill(8, "taskLightGrey");
-            AssignTaskFill(9, "taskDarkGrey");
+            ResetTaskColors();
 
             // Set first (top) task as active.
             Task t01 = tasks.ElementAt(0) as Task;
@@ -140,6 +131,23 @@ namespace Task_Time_Counter_2
             {
                 task.ResetName();
             }
+        }
+
+        /// <summary>
+        /// Resets task colors to their starting defaults.
+        /// </summary>
+        public void ResetTaskColors()
+        {
+            AssignTaskFill(0, "taskOrange");
+            AssignTaskFill(1, "taskRed");
+            AssignTaskFill(2, "taskPink");
+            AssignTaskFill(3, "taskPurple");
+            AssignTaskFill(4, "taskBlue");
+            AssignTaskFill(5, "taskCyan");
+            AssignTaskFill(6, "taskYellowGreen");
+            AssignTaskFill(7, "taskGreen");
+            AssignTaskFill(8, "taskLightGrey");
+            AssignTaskFill(9, "taskDarkGrey");
         }
 
         private void AssignTaskFill(int index, string styleName)

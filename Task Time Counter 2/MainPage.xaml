@@ -27,8 +27,8 @@
         <Grid x:Name="FooterLayout" VerticalAlignment="Bottom" Height="119" Margin="0,592,0,0">
             <TextBlock x:Name="TotalLabel" Text="Total" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,92"/>
             <TextBlock x:Name="TotalTime" Text="(7.2) 07:12:02" TextWrapping="Wrap" Margin="19,0,0,64" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Consolas" FontSize="18"/>
-            <Button x:Name="ClearTimesBtn" Content="Clear Times" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Height="37" Background="#33000000" Width="100" FontSize="13" Margin="0,0,110,10" HorizontalAlignment="Center" Tapped="OnClearTimesTapped"/>
-            <Button x:Name="ClearAllBtn" Content="Clear All" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="110,0,0,10" Height="37" Background="#33000000" Width="100" FontSize="13" HorizontalAlignment="Center" Tapped="OnClearAllTapped"/>
+            <Button x:Name="ClearTimesBtn" Content="Reset Times" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Height="37" Background="#33000000" Width="100" FontSize="13" Margin="0,0,110,10" HorizontalAlignment="Center" Tapped="OnClearTimesTapped"/>
+            <Button x:Name="ClearAllBtn" Content="Reset All" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="110,0,0,10" Height="37" Background="#33000000" Width="100" FontSize="13" HorizontalAlignment="Center" Tapped="OnClearAllTapped"/>
         </Grid>
     </Grid>
 </Page>
