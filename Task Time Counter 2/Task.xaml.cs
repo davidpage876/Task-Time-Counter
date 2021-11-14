@@ -20,6 +20,7 @@ namespace Task_Time_Counter_2
 {
     public sealed partial class Task : UserControl
     {
+        private const string PLACEHOLDER_TASK_NAME = "Unnamed task";
         private DispatcherTimer dispatchTimer;
         private Stopwatch stopwatch;
         private TimeSpan timeOffset = TimeSpan.Zero;
@@ -27,7 +28,7 @@ namespace Task_Time_Counter_2
         private bool isRecording = false;
         private bool isEditingName = false;
         private bool isEditingTime = false;
-        private string taskName = "Unnamed task";
+        private string taskName = "";
 
         // References.
         private Button toTopBtn;
@@ -129,6 +130,15 @@ namespace Task_Time_Counter_2
             IsRecording = false;
         }
 
+        /// <summary>
+        /// Resets the task name to blank.
+        /// </summary>
+        public void ResetName()
+        {
+            taskName = "";
+            UpdateNameUI();
+        }
+
         private void UpdateUI()
         {
             // Update button state.
@@ -162,7 +172,14 @@ namespace Task_Time_Counter_2
 
         private void UpdateNameUI()
         {
-            nameBtn.Content = taskName;
+            if (taskName == "")
+            {
+                nameBtn.Content = PLACEHOLDER_TASK_NAME;
+            }
+            else
+            {
+                nameBtn.Content = taskName;
+            }
         }
 
         private void UpdateTimerUI()

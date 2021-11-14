@@ -61,6 +61,17 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
+        /// Resets all task names to blank.
+        /// </summary>
+        public void ClearTaskNames()
+        {
+            foreach (Task task in taskList.Children)
+            {
+                task.ResetName();
+            }
+        }
+
+        /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>

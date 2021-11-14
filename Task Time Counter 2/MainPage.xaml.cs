@@ -43,5 +43,11 @@ namespace Task_Time_Counter_2
         {
             app.ClearTaskTimes();
         }
+
+        private void OnClearAllTapped(object sender, TappedRoutedEventArgs e)
+        {
+            app.ClearTaskTimes();
+            app.ClearTaskNames();
+        }
     }
 }
