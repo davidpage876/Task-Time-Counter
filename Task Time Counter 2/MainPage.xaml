@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="290" Height="712" MinWidth="290">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" MinWidth="290">
 
     <Grid x:Name="MainLayout">
         <Rectangle x:Name="MainBg" Stroke="Black" Fill="#FF232323"/>
