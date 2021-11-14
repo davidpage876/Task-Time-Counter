@@ -5,6 +5,8 @@
     xmlns:local="using:Task_Time_Counter_2">
 
     <Application.Resources>
+        
+        <!-- Task brushes -->
         <AcrylicBrush x:Key="taskRed" TintColor="#FFAC3232" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FFAC5050"/>
         <AcrylicBrush x:Key="taskGreen" TintColor="#FF2DA248" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF51A264"/>
         <AcrylicBrush x:Key="taskBlue" TintColor="#FF2165A8" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF3D71A4"/>
@@ -15,6 +17,18 @@
         <AcrylicBrush x:Key="taskPink" TintColor="#FFA43EA8" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF9F5CA2"/>
         <AcrylicBrush x:Key="taskLightGrey" TintColor="#FF9C9C9C" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF838383"/>
         <AcrylicBrush x:Key="taskDarkGrey" TintColor="#FF4F4F4F" TintOpacity="0.85" BackgroundSource="HostBackdrop" FallbackColor="#FF3E3E3E"/>
+
+        <!-- Task brushes - focused state -->
+        <SolidColorBrush x:Key="taskRedFocus" Color="#FFAC3232"/>
+        <SolidColorBrush x:Key="taskGreenFocus" Color="#FF2DA248"/>
+        <SolidColorBrush x:Key="taskBlueFocus" Color="#FF2165A8"/>
+        <SolidColorBrush x:Key="taskYellowFocus" Color="#FFB6B632"/>
+        <SolidColorBrush x:Key="taskPurpleFocus" Color="#FF5839A8"/>
+        <SolidColorBrush x:Key="taskCyanFocus" Color="#FF2AA6AC"/>
+        <SolidColorBrush x:Key="taskOrangeFocus" Color="#FFB9752E"/>
+        <SolidColorBrush x:Key="taskPinkFocus" Color="#FFA43EA8"/>
+        <SolidColorBrush x:Key="taskLightGreyFocus" Color="#FF9C9C9C"/>
+        <SolidColorBrush x:Key="taskDarkGreyFocus" Color="#FF4F4F4F"/>
     </Application.Resources>
 
 </Application>

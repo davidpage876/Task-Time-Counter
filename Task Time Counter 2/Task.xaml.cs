@@ -30,6 +30,8 @@ namespace Task_Time_Counter_2
         private bool isEditingName = false;
         private bool isEditingTime = false;
         private string taskName = "";
+        private Brush normalFill;
+        private Brush focusFill;
 
         // References.
         private App app;
@@ -66,6 +68,18 @@ namespace Task_Time_Counter_2
             dispatchTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
 
             // Update UI based on default state.
+            UpdateUI();
+        }
+
+        /// <summary>
+        /// Assigns fill style to use for this task.
+        /// 
+        /// Focus is used when the task is active, normal otherwise.
+        /// </summary>
+        public void AssignFillStyle(Brush normal, Brush focus)
+        {
+            normalFill = normal;
+            focusFill = focus;
             UpdateUI();
         }
 
@@ -128,14 +142,6 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
-        /// Sets the background fill style.
-        /// </summary>
-        public void SetFillStyle(Brush fill)
-        {
-            panelBg.Fill = fill;
-        }
-
-        /// <summary>
         /// Resets the recorded task time to zero.
         /// </summary>
         public void ResetTime()
@@ -156,6 +162,9 @@ namespace Task_Time_Counter_2
 
         private void UpdateUI()
         {
+            // Update background fill.
+            panelBg.Fill = isActive ? focusFill : normalFill;
+
             // Update button state.
             const string PLAY_ICON = "";
             const string PAUSE_ICON = "";

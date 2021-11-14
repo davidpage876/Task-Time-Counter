@@ -68,22 +68,21 @@ namespace Task_Time_Counter_2
             taskList = mainUI.FindName("TaskList") as StackPanel;
             UIElementCollection tasks = taskList.Children;
 
-            // Enable play button on first task.
+            // Set each task's background fill.
+            AssignTaskFill(0, "taskRed");
+            AssignTaskFill(1, "taskGreen");
+            AssignTaskFill(2, "taskBlue");
+            AssignTaskFill(3, "taskYellow");
+            AssignTaskFill(4, "taskPurple");
+            AssignTaskFill(5, "taskCyan");
+            AssignTaskFill(6, "taskOrange");
+            AssignTaskFill(7, "taskPink");
+            AssignTaskFill(8, "taskLightGrey");
+            AssignTaskFill(9, "taskDarkGrey");
+
+            // Set first (top) task as active.
             Task t01 = tasks.ElementAt(0) as Task;
             t01.Active = true;
-
-            // Set color style for each task.
-            var r = Resources;
-            (tasks.ElementAt(0) as Task).SetFillStyle(r["taskRed"] as Brush);
-            (tasks.ElementAt(1) as Task).SetFillStyle(r["taskGreen"] as Brush);
-            (tasks.ElementAt(2) as Task).SetFillStyle(r["taskBlue"] as Brush);
-            (tasks.ElementAt(3) as Task).SetFillStyle(r["taskYellow"] as Brush);
-            (tasks.ElementAt(4) as Task).SetFillStyle(r["taskPurple"] as Brush);
-            (tasks.ElementAt(5) as Task).SetFillStyle(r["taskCyan"] as Brush);
-            (tasks.ElementAt(6) as Task).SetFillStyle(r["taskOrange"] as Brush);
-            (tasks.ElementAt(7) as Task).SetFillStyle(r["taskPink"] as Brush);
-            (tasks.ElementAt(8) as Task).SetFillStyle(r["taskLightGrey"] as Brush);
-            (tasks.ElementAt(9) as Task).SetFillStyle(r["taskDarkGrey"] as Brush);
 
             // Set up dispatch timer for updating UI.
             dispatchTimer = new DispatcherTimer();
@@ -141,6 +140,14 @@ namespace Task_Time_Counter_2
             {
                 task.ResetName();
             }
+        }
+
+        private void AssignTaskFill(int index, string styleName)
+        {
+            var task = taskList.Children.ElementAt(index) as Task;
+            task.AssignFillStyle(
+                Resources[styleName] as Brush, 
+                Resources[styleName + "Focus"] as Brush);
         }
 
         private void OnTimerTick(object sender, object e)
