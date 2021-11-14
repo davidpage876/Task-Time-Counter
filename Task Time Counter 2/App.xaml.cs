@@ -69,14 +69,14 @@ namespace Task_Time_Counter_2
             UIElementCollection tasks = taskList.Children;
 
             // Set each task's background fill.
-            AssignTaskFill(0, "taskRed");
-            AssignTaskFill(1, "taskGreen");
-            AssignTaskFill(2, "taskBlue");
-            AssignTaskFill(3, "taskYellow");
-            AssignTaskFill(4, "taskPurple");
+            AssignTaskFill(0, "taskOrange");
+            AssignTaskFill(1, "taskRed");
+            AssignTaskFill(2, "taskPink");
+            AssignTaskFill(3, "taskPurple");
+            AssignTaskFill(4, "taskBlue");
             AssignTaskFill(5, "taskCyan");
-            AssignTaskFill(6, "taskOrange");
-            AssignTaskFill(7, "taskPink");
+            AssignTaskFill(6, "taskYellowGreen");
+            AssignTaskFill(7, "taskGreen");
             AssignTaskFill(8, "taskLightGrey");
             AssignTaskFill(9, "taskDarkGrey");
 
