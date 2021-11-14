@@ -65,7 +65,7 @@ namespace Task_Time_Counter_2
             // Set up dispatch timer for updating UI.
             dispatchTimer = new DispatcherTimer();
             dispatchTimer.Tick += OnTimerTick;
-            dispatchTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatchTimer.Interval = new TimeSpan(0, 0, 0, 0, 100); // Update every 100 milliseconds.
 
             // Update UI based on default state.
             UpdateUI();
@@ -131,14 +131,41 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
-        /// Returns the current recorded time on the timer in seconds.
+        /// Sets the recorded time on the timer.
+        /// Get returns the current recorded time on the timer.
         /// </summary>
         public TimeSpan Time
         {
-            get 
+            set
+            {
+                if (IsRecording)
+                {
+                    stopwatch.Restart();
+                } 
+                else
+                {
+                    stopwatch.Reset();
+                }
+                timeOffset = value;
+                UpdateTimerUI();
+            }
+            get
             {
                 return timeOffset + stopwatch.Elapsed;
             }
+        }
+
+        /// <summary>
+        /// Returns the name of the task.
+        /// </summary>
+        public string TaskName
+        {
+            set
+            {
+                taskName = value;
+                UpdateNameUI();
+            }
+            get { return taskName; }
         }
 
         /// <summary>
@@ -248,7 +275,7 @@ namespace Task_Time_Counter_2
             // Focus on the name button, without showing the keyboard focus visual.
             nameBtn.Focus(FocusState.Pointer);
         }
-
+        
         private void OpenEditTime()
         {
             isEditingTime = true;
@@ -273,16 +300,7 @@ namespace Task_Time_Counter_2
                 try
                 {
                     // Restart the timer with the given value as the starting time offset.
-                    if (IsRecording)
-                    {
-                        stopwatch.Restart();
-                    }
-                    else
-                    {
-                        stopwatch.Reset();
-                    }
-                    timeOffset = TimeSpan.Parse(timeEdit.Text);
-                    UpdateTimerUI();
+                    Time = TimeSpan.Parse(timeEdit.Text);
                 }
                 catch (Exception e)
                 {

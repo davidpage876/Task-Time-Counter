@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
+using Windows.Storage;
 
 namespace Task_Time_Counter_2
 {
@@ -24,7 +25,9 @@ namespace Task_Time_Counter_2
     /// </summary>
     sealed partial class App : Application
     {
+        private ApplicationDataContainer localSettings;
         private DispatcherTimer dispatchTimer;
+        private DispatcherTimer autosaveTimer;
         private TextBlock totalTime;
 
         StackPanel taskList;
@@ -60,6 +63,9 @@ namespace Task_Time_Counter_2
             // Set up preferred window size.
             ApplicationView.PreferredLaunchViewSize = new Size(320, 670);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+            // Get local app data store.
+            localSettings = ApplicationData.Current.LocalSettings;
         }
 
         /// <summary>
@@ -97,6 +103,15 @@ namespace Task_Time_Counter_2
             dispatchTimer.Tick += OnTimerTick;
             dispatchTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             dispatchTimer.Start();
+
+            // Attempt to load state from a previous session.
+            LoadState();
+
+            // Set up dispatch timer for periodic auto-saving to file.
+            autosaveTimer = new DispatcherTimer();
+            autosaveTimer.Tick += OnAutosaveTick;
+            autosaveTimer.Interval = new TimeSpan(0, 0, 10); // Update every 10 seconds.
+            autosaveTimer.Start();
         }
 
         /// <summary>
@@ -163,6 +178,59 @@ namespace Task_Time_Counter_2
             }
         }
 
+        private string MakeTaskName(int i)
+        {
+            return string.Format("Task{0}", i);
+        } 
+
+        /// <summary>
+        /// Saves app state for recall between sessions.
+        /// </summary>
+        public void SaveState()
+        {
+            // Save task list data.
+            int i = 0;
+            foreach (Task task in taskList.Children)
+            {
+                // Save task data.
+                var taskData = new ApplicationDataCompositeValue();
+                taskData["TaskName"] = task.TaskName;
+                taskData["TaskTime"] = task.Time;
+
+                localSettings.Values[MakeTaskName(i)] = taskData;
+                i++;
+            }
+        }
+
+        /// <summary>
+        /// Restores previously saved app state.
+        /// 
+        /// If no app state was saved, has no effect.
+        /// </summary>
+        public void LoadState()
+        {
+            // Load task list data.
+            int i = 0;
+            foreach (Task task in taskList.Children)
+            {
+                var taskData = (ApplicationDataCompositeValue)
+                    localSettings.Values[MakeTaskName(i)]; 
+
+                if (taskData == null)
+                {
+                    // Data not found.
+                    break;
+                }
+                else
+                {
+                    // Load task data.
+                    task.TaskName = (string)taskData["TaskName"];
+                    task.Time = (TimeSpan)taskData["TaskTime"];
+                }
+                i++;
+            }
+        }
+
         private void AssignTaskFill(int index, string styleName)
         {
             var task = taskList.Children.ElementAt(index) as Task;
@@ -180,6 +248,11 @@ namespace Task_Time_Counter_2
                 total += task.Time;
             }
             totalTime.Text = FormatTimeLong(total);
+        }
+
+        private void OnAutosaveTick(object sender, object e)
+        {
+            SaveState();
         }
 
         /// <summary>
