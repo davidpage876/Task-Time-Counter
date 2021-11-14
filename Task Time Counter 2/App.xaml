@@ -5,30 +5,11 @@
     xmlns:local="using:Task_Time_Counter_2">
 
     <Application.Resources>
-        
-        <!-- Task brushes -->
-        <AcrylicBrush x:Key="taskRed" TintColor="#FFC11717" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FFAC5050"/>
-        <AcrylicBrush x:Key="taskGreen" TintColor="#FF19A839" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF51A264"/>
-        <AcrylicBrush x:Key="taskBlue" TintColor="#FF1767B6" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF3D71A4"/>
-        <AcrylicBrush x:Key="taskYellowGreen" TintColor="#FF78CB15" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF89B45E"/>
-        <AcrylicBrush x:Key="taskPurple" TintColor="#FF5026BD" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF6D5A9E"/>
-        <AcrylicBrush x:Key="taskCyan" TintColor="#FF15B2B9" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF4EA4A8"/>
-        <AcrylicBrush x:Key="taskOrange" TintColor="#FFCD6D07" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FFBF8345"/>
-        <AcrylicBrush x:Key="taskPink" TintColor="#FFA92BAE" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF9F5CA2"/>
-        <AcrylicBrush x:Key="taskLightGrey" TintColor="#FF898989" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF838383"/>
-        <AcrylicBrush x:Key="taskDarkGrey" TintColor="#FF343434" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF474747"/>
 
-        <!-- Task brushes - focused state -->
-        <SolidColorBrush x:Key="taskRedFocus" Color="#FFCD2929"/>
-        <SolidColorBrush x:Key="taskGreenFocus" Color="#FF009E24"/>
-        <SolidColorBrush x:Key="taskBlueFocus" Color="#FF146CC3"/>
-        <SolidColorBrush x:Key="taskYellowGreenFocus" Color="#FF77BB00"/>
-        <SolidColorBrush x:Key="taskPurpleFocus" Color="#FF522CB6"/>
-        <SolidColorBrush x:Key="taskCyanFocus" Color="#FF03AFB8"/>
-        <SolidColorBrush x:Key="taskOrangeFocus" Color="#FFEA7800"/>
-        <SolidColorBrush x:Key="taskPinkFocus" Color="#FFAE21B4"/>
-        <SolidColorBrush x:Key="taskLightGreyFocus" Color="#FF939393"/>
-        <SolidColorBrush x:Key="taskDarkGreyFocus" Color="#FF2E2E2E"/>
+        <!-- Task brushes -->
+        <AcrylicBrush x:Key="taskBrush" TintColor="#FF232323" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF232323"/>
+        <AcrylicBrush x:Key="taskFocusBrush" TintColor="#FF595959" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF595959"/>
+
     </Application.Resources>
 
 </Application>

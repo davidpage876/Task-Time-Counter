@@ -138,16 +138,12 @@ namespace Task_Time_Counter_2
         /// </summary>
         public void ResetTaskColors()
         {
-            AssignTaskFill(0, "taskOrange");
-            AssignTaskFill(1, "taskRed");
-            AssignTaskFill(2, "taskPink");
-            AssignTaskFill(3, "taskPurple");
-            AssignTaskFill(4, "taskBlue");
-            AssignTaskFill(5, "taskCyan");
-            AssignTaskFill(6, "taskYellowGreen");
-            AssignTaskFill(7, "taskGreen");
-            AssignTaskFill(8, "taskLightGrey");
-            AssignTaskFill(9, "taskDarkGrey");
+            foreach (Task task in taskList.Children)
+            {
+                task.AssignFillStyle(
+                    Resources["taskBrush"] as Brush, 
+                    Resources["taskFocusBrush"] as Brush);
+            }
         }
 
         private void AssignTaskFill(int index, string styleName)
