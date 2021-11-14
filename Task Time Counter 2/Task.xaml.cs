@@ -25,6 +25,7 @@ namespace Task_Time_Counter_2
         private DispatcherTimer dispatchTimer;
         private Stopwatch stopwatch;
         private TimeSpan timeOffset = TimeSpan.Zero;
+        private bool hasContent = false;
         private bool isActive = false;
         private bool isRecording = false;
         private bool isEditingName = false;
@@ -36,6 +37,8 @@ namespace Task_Time_Counter_2
         // References.
         private App app;
         private Border panel;
+        private Grid blank;
+        private Grid content;
         private Button toTopBtn;
         private Button playPauseBtn;
         private Button timeBtn;
@@ -52,6 +55,8 @@ namespace Task_Time_Counter_2
 
             // Get control references.
             panel = FindName("Panel") as Border;
+            blank = FindName("Blank") as Grid;
+            content = FindName("Content") as Grid;
             toTopBtn = FindName("ToTopBtn") as Button;
             playPauseBtn = FindName("PlayPauseBtn") as Button;
             timeBtn = FindName("TimeBtn") as Button;
@@ -81,6 +86,19 @@ namespace Task_Time_Counter_2
             normalFill = normal;
             focusFill = focus;
             UpdateUI();
+        }
+
+        /// <summary>
+        /// Does the task have content, or is it blank.
+        /// </summary>
+        public bool HasContent
+        {
+            set
+            {
+                hasContent = value;
+                UpdateUI();
+            }
+            get { return hasContent; }
         }
 
         /// <summary>
@@ -192,33 +210,47 @@ namespace Task_Time_Counter_2
             // Update panel background.
             panel.Background = isActive ? focusFill : normalFill;
 
-            // Update button state.
-            const string PLAY_ICON = "";
-            const string PAUSE_ICON = "";
-            if (isActive)
+            // Update content state.
+            if (hasContent)
             {
-                toTopBtn.Visibility = Visibility.Collapsed;
-                playPauseBtn.Visibility = Visibility.Visible;
-                if (isRecording)
+                // Show content.
+                blank.Visibility = Visibility.Collapsed;
+                content.Visibility = Visibility.Visible;
+
+                // Update button state.
+                const string PLAY_ICON = "";
+                const string PAUSE_ICON = "";
+                if (isActive)
                 {
-                    playPauseBtn.Content = PAUSE_ICON;
+                    toTopBtn.Visibility = Visibility.Collapsed;
+                    playPauseBtn.Visibility = Visibility.Visible;
+                    if (isRecording)
+                    {
+                        playPauseBtn.Content = PAUSE_ICON;
+                    }
+                    else
+                    {
+                        playPauseBtn.Content = PLAY_ICON;
+                    }
                 }
                 else
                 {
-                    playPauseBtn.Content = PLAY_ICON;
+                    toTopBtn.Visibility = Visibility.Visible;
+                    playPauseBtn.Visibility = Visibility.Collapsed;
                 }
+
+                // Update displayed task name.
+                UpdateNameUI();
+
+                // Update displayed timer value.
+                UpdateTimerUI();
             }
             else
             {
-                toTopBtn.Visibility = Visibility.Visible;
-                playPauseBtn.Visibility = Visibility.Collapsed;
+                // Show blank.
+                blank.Visibility = Visibility.Visible;
+                content.Visibility = Visibility.Collapsed;
             }
-
-            // Update displayed task name.
-            UpdateNameUI();
-
-            // Update displayed timer value.
-            UpdateTimerUI();
         }
 
         private void UpdateNameUI()
@@ -405,6 +437,11 @@ namespace Task_Time_Counter_2
         private void ToTopBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             app.ActiveTask = this;
+        }
+
+        private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
+        {
+            HasContent = true;
         }
     }
 }

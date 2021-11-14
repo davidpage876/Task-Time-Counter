@@ -96,6 +96,7 @@ namespace Task_Time_Counter_2
 
             // Set first (top) task as active.
             Task t01 = tasks.ElementAt(0) as Task;
+            t01.HasContent = true;
             t01.Active = true;
 
             // Set up dispatch timer for updating UI.
