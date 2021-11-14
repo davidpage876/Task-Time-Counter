@@ -5,7 +5,7 @@
     xmlns:local="using:Task_Time_Counter_2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" MinWidth="290" Background="#FF232323">
+    mc:Ignorable="d" MinWidth="290" Background="#FF232323" d:DesignWidth="290">
 
     <Grid x:Name="MainLayout">
         <ScrollViewer Margin="0,0,0,120">

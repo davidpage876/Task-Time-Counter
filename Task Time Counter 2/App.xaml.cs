@@ -64,8 +64,13 @@ namespace Task_Time_Counter_2
         /// <param name="pg">The main page of the app.</param>
         public void InitializeUI(MainPage mainUI)
         {
-            // Set window title bar color.
             var appView = ApplicationView.GetForCurrentView();
+
+            // Set up preferred window size.
+            Size minWindowSize = new Size(290, 200);
+            appView.SetPreferredMinSize(minWindowSize);
+
+            // Set window title bar color.
             var titleBar = appView.TitleBar;
             var windowBarColor = (Windows.UI.Color)Resources["windowBarColor"];
             titleBar.BackgroundColor = windowBarColor;
