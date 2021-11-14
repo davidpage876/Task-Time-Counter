@@ -22,6 +22,7 @@ namespace Task_Time_Counter_2
     {
         private DispatcherTimer dispatchTimer;
         private Stopwatch stopwatch;
+        private TimeSpan timeOffset = TimeSpan.Zero;
         private bool isActive = false;
         private bool isRecording = false;
         private bool isEditingName = false;
@@ -114,7 +115,7 @@ namespace Task_Time_Counter_2
         {
             get 
             {
-                return stopwatch.Elapsed;
+                return timeOffset + stopwatch.Elapsed;
             }
         }
 
@@ -233,35 +234,16 @@ namespace Task_Time_Counter_2
             {
                 try
                 {
-                    // Get hour, minute and seconds from input.
-                    string input = timeEdit.Text;
-                    string[] parts = input.Split(':');
-                    if (parts.Length != 3)
+                    // Restart the timer with the given value as the starting time offset.
+                    if (IsRecording)
                     {
-                        throw new Exception(string.Format("Invalid format: \"{0}\"", input));
+                        stopwatch.Restart();
                     }
-
-                    int hour = int.Parse(parts[0]); // May throw FormatException.
-                    if (hour > 60 || hour < 0)
+                    else
                     {
-                        throw new Exception(string.Format("Hours outside of range (0-60): \"{0}\"", input));
+                        stopwatch.Reset();
                     }
-
-                    int minute = int.Parse(parts[1]); // May throw FormatException.
-                    if (minute > 60 || minute < 0)
-                    {
-                        throw new Exception(string.Format("Minutes outside of range (0-60): \"{0}\"", input));
-                    }
-
-                    float seconds = float.Parse(parts[2]); // May throw FormatException.
-                    if (seconds > 60f + float.Epsilon || seconds < float.Epsilon)
-                    {
-                        throw new Exception(string.Format("Seconds outside of range (0-60): \"{0}\"", input));
-                    }
-
-                    // Update timer with new time.
-                    // Todo.
-
+                    timeOffset = TimeSpan.Parse(timeEdit.Text);
                     UpdateTimerUI();
                 }
                 catch (Exception e)
