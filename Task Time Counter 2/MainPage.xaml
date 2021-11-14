@@ -20,6 +20,8 @@
                 <local:Task x:Name="Task07" Height="68"/>
                 <local:Task x:Name="Task08" Height="68"/>
                 <local:Task x:Name="Task09" Height="68"/>
+                <local:Task x:Name="Task10" Height="68"/>
+                <local:Task x:Name="Task11" Height="68"/>
             </StackPanel>
         </ScrollViewer>
         <Grid x:Name="FooterLayout" VerticalAlignment="Bottom" Height="119">
