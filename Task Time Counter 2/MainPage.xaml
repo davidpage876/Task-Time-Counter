@@ -11,7 +11,7 @@
     <Grid x:Name="MainLayout">
         <Rectangle x:Name="MainBg" Stroke="Black" Fill="#FF232323"/>
         <ScrollViewer Margin="0,0,0,120">
-            <StackPanel x:Name="TaskList" Padding="0,2,0,2" Height="712">
+            <StackPanel x:Name="TaskList" Padding="0,2,0,2">
                 <local:Task x:Name="Task00" Height="68"/>
                 <local:Task x:Name="Task01" Height="68"/>
                 <local:Task x:Name="Task02" Height="68"/>
