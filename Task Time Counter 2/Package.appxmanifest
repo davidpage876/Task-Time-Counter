@@ -14,8 +14,8 @@
   <mp:PhoneIdentity PhoneProductId="94a18928-2d4a-4630-918f-023947de34dc" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Task Time Counter 2</DisplayName>
-    <PublisherDisplayName>evild</PublisherDisplayName>
+    <DisplayName>Task Time Counter</DisplayName>
+    <PublisherDisplayName>David Page Interactive</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -37,7 +37,11 @@
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="Task Time Counter"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="wide310x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
