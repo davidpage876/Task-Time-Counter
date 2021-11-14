@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
 
 namespace Task_Time_Counter_2
 {
@@ -63,6 +64,15 @@ namespace Task_Time_Counter_2
         /// <param name="pg">The main page of the app.</param>
         public void InitializeUI(MainPage mainUI)
         {
+            // Set window title bar color.
+            var appView = ApplicationView.GetForCurrentView();
+            var titleBar = appView.TitleBar;
+            var windowBarColor = (Windows.UI.Color)Resources["windowBarColor"];
+            titleBar.BackgroundColor = windowBarColor;
+            titleBar.ButtonBackgroundColor = windowBarColor;
+            titleBar.InactiveBackgroundColor = windowBarColor;
+            titleBar.ButtonInactiveBackgroundColor = windowBarColor;
+
             // Get control references.
             totalTime = mainUI.FindName("TotalTime") as TextBlock;
             taskList = mainUI.FindName("TaskList") as StackPanel;

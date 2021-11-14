@@ -6,6 +6,9 @@
 
     <Application.Resources>
 
+        <!-- Colors -->
+        <Color x:Key="windowBarColor">#FF232323</Color>
+
         <!-- Task brushes -->
         <AcrylicBrush x:Key="taskBrush" TintColor="#FF232323" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF232323"/>
         <AcrylicBrush x:Key="taskFocusBrush" TintColor="#FF595959" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF595959"/>
