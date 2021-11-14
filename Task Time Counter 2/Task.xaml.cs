@@ -35,13 +35,13 @@ namespace Task_Time_Counter_2
 
         // References.
         private App app;
+        private Border panel;
         private Button toTopBtn;
         private Button playPauseBtn;
         private Button timeBtn;
         private TextBox timeEdit;
         private Button nameBtn;
         private TextBox nameEdit;
-        private Rectangle panelBg;
 
         public Task()
         {
@@ -51,13 +51,13 @@ namespace Task_Time_Counter_2
             app = Application.Current as App;
 
             // Get control references.
+            panel = FindName("Panel") as Border;
             toTopBtn = FindName("ToTopBtn") as Button;
             playPauseBtn = FindName("PlayPauseBtn") as Button;
             timeBtn = FindName("TimeBtn") as Button;
             timeEdit = FindName("TimeEdit") as TextBox;
             nameBtn = FindName("NameBtn") as Button;
             nameEdit = FindName("NameEdit") as TextBox;
-            panelBg = FindName("PanelBg") as Rectangle;
 
             // Set up stopwatch for recording time.
             stopwatch = new Stopwatch();
@@ -189,8 +189,8 @@ namespace Task_Time_Counter_2
 
         private void UpdateUI()
         {
-            // Update background fill.
-            panelBg.Fill = isActive ? focusFill : normalFill;
+            // Update panel background.
+            panel.Background = isActive ? focusFill : normalFill;
 
             // Update button state.
             const string PLAY_ICON = "";
