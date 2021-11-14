@@ -20,10 +20,13 @@ namespace Task_Time_Counter_2
 {
     public sealed partial class Task : UserControl
     {
+        private DispatcherTimer dispatchTimer;
+        private Stopwatch stopwatch;
         private bool isActive = false;
         private bool isRecording = false;
-        Button toTopBtn;
-        Button playPauseBtn;
+        private Button toTopBtn;
+        private Button playPauseBtn;
+        private Button timeBtn;
 
         public Task()
         {
@@ -32,9 +35,18 @@ namespace Task_Time_Counter_2
             // Get control references.
             toTopBtn = FindName("ToTopBtn") as Button;
             playPauseBtn = FindName("PlayPauseBtn") as Button;
+            timeBtn = FindName("TimeBtn") as Button;
 
-            // Set default state.
-            Active = false;
+            // Set up stopwatch for recording time.
+            stopwatch = new Stopwatch();
+
+            // Set up dispatch timer for updating UI.
+            dispatchTimer = new DispatcherTimer();
+            dispatchTimer.Tick += OnTimerTick;
+            dispatchTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+
+            // Update UI based on default state.
+            UpdateUI();
         }
 
         /// <summary>
@@ -51,10 +63,12 @@ namespace Task_Time_Counter_2
                 // Stop recording if not active.
                 if (!isActive)
                 {
-                    isRecording = false;
+                    IsRecording = false;
                 }
-
-                UpdateUI();
+                else
+                {
+                    UpdateUI();
+                }
             }
             get { return isActive; }
         }
@@ -67,9 +81,30 @@ namespace Task_Time_Counter_2
             set 
             { 
                 isRecording = value;
+                if (isRecording)
+                {
+                    stopwatch.Start();
+                    dispatchTimer.Start();
+                }
+                else
+                {
+                    stopwatch.Stop();
+                    dispatchTimer.Stop();
+                }
                 UpdateUI();
             }
             get { return isRecording; }
+        }
+
+        /// <summary>
+        /// Returns the current recorded time on the timer in seconds.
+        /// </summary>
+        public TimeSpan Time
+        {
+            get 
+            {
+                return stopwatch.Elapsed;
+            }
         }
 
         private void UpdateUI()
@@ -94,6 +129,24 @@ namespace Task_Time_Counter_2
                 toTopBtn.Visibility = Visibility.Visible;
                 playPauseBtn.Visibility = Visibility.Collapsed;
             }
+            UpdateTimerUI();
+        }
+
+        private void UpdateTimerUI()
+        {
+            timeBtn.Content = FormatTime(Time);
+        }
+
+        private void OnTimerTick(object sender, object e)
+        {
+            UpdateTimerUI();
+        }
+
+        private string FormatTime(TimeSpan elapsed)
+        {
+            return string.Format("({0}) {1:00}:{2:00}:{3:00}.{4:0}",
+                Math.Round(elapsed.TotalHours, 1),
+                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
