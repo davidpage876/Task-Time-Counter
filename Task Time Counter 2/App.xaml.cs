@@ -80,6 +80,35 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
+        /// Sets a task to be the active (top-most) task.
+        /// Get returns a reference to the currently active (top-most) task.
+        /// </summary>
+        public Task ActiveTask
+        {
+            set
+            {
+                Task task = value;
+
+                // Make the current top-most task inactive.
+                Task currentTask = ActiveTask;
+                bool wasRecording = currentTask.IsRecording;
+                currentTask.Active = false;
+
+                // Reorder this task to be at the top.
+                taskList.Children.Remove(task);
+                taskList.Children.Insert(0, task);
+
+                // Start recording time if we were previously recording.
+                task.IsRecording = wasRecording;
+                task.Active = true;
+            }
+            get
+            {
+                return taskList.Children.First() as Task;
+            }
+        }
+
+        /// <summary>
         /// Resets all task times to zero and stops the active timer.
         /// </summary>
         public void ClearTaskTimes()

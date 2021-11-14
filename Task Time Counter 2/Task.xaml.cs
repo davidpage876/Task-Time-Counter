@@ -31,6 +31,7 @@ namespace Task_Time_Counter_2
         private string taskName = "";
 
         // References.
+        private App app;
         private Button toTopBtn;
         private Button playPauseBtn;
         private Button timeBtn;
@@ -41,6 +42,9 @@ namespace Task_Time_Counter_2
         public Task()
         {
             this.InitializeComponent();
+
+            // Get app reference.
+            app = Application.Current as App;
 
             // Get control references.
             toTopBtn = FindName("ToTopBtn") as Button;
@@ -274,11 +278,6 @@ namespace Task_Time_Counter_2
             // Focus on the time button, without showing the keyboard focus visual.
             timeBtn.Focus(FocusState.Pointer);
         }
-
-        private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
         
         private void onPlayPauseTapped(object sender, TappedRoutedEventArgs e)
         {
@@ -363,6 +362,11 @@ namespace Task_Time_Counter_2
 
             // Apply editing of task time on context menu open (right click).
             CloseEditTime(true);
+        }
+
+        private void ToTopBtnPressed(object sender, TappedRoutedEventArgs e)
+        {
+            app.ActiveTask = this;
         }
     }
 }
