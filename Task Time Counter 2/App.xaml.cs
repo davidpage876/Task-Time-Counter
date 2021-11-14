@@ -82,8 +82,8 @@ namespace Task_Time_Counter_2
             (tasks.ElementAt(5) as Task).SetFillStyle(r["taskCyan"] as Brush);
             (tasks.ElementAt(6) as Task).SetFillStyle(r["taskOrange"] as Brush);
             (tasks.ElementAt(7) as Task).SetFillStyle(r["taskPink"] as Brush);
-            (tasks.ElementAt(8) as Task).SetFillStyle(r["taskTeal"] as Brush);
-            (tasks.ElementAt(9) as Task).SetFillStyle(r["taskGrey"] as Brush);
+            (tasks.ElementAt(8) as Task).SetFillStyle(r["taskLightGrey"] as Brush);
+            (tasks.ElementAt(9) as Task).SetFillStyle(r["taskDarkGrey"] as Brush);
 
             // Set up dispatch timer for updating UI.
             dispatchTimer = new DispatcherTimer();
