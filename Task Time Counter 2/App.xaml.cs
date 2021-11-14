@@ -110,7 +110,7 @@ namespace Task_Time_Counter_2
             // Set up dispatch timer for periodic auto-saving to file.
             autosaveTimer = new DispatcherTimer();
             autosaveTimer.Tick += OnAutosaveTick;
-            autosaveTimer.Interval = new TimeSpan(0, 0, 10); // Update every 10 seconds.
+            autosaveTimer.Interval = new TimeSpan(0, 0, 30); // Update every 30 seconds.
             autosaveTimer.Start();
         }
 
@@ -275,7 +275,7 @@ namespace Task_Time_Counter_2
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    LoadState();
                 }
 
                 // Place the frame in the current Window
@@ -316,7 +316,10 @@ namespace Task_Time_Counter_2
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+
+            // Save before exiting.
+            SaveState();
+
             deferral.Complete();
         }
     }
