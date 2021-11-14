@@ -21,7 +21,7 @@ namespace Task_Time_Counter_2
 {
     public sealed partial class Task : UserControl
     {
-        private const string PLACEHOLDER_TASK_NAME = "Unnamed task";
+        private const string PLACEHOLDER_TASK_NAME = "Unnamed";
         private DispatcherTimer dispatchTimer;
         private Stopwatch stopwatch;
         private TimeSpan timeOffset = TimeSpan.Zero;
