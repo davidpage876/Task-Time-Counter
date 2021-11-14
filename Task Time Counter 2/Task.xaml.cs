@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -38,6 +39,7 @@ namespace Task_Time_Counter_2
         private TextBox timeEdit;
         private Button nameBtn;
         private TextBox nameEdit;
+        private Rectangle panelBg;
 
         public Task()
         {
@@ -53,6 +55,7 @@ namespace Task_Time_Counter_2
             timeEdit = FindName("TimeEdit") as TextBox;
             nameBtn = FindName("NameBtn") as Button;
             nameEdit = FindName("NameEdit") as TextBox;
+            panelBg = FindName("PanelBg") as Rectangle;
 
             // Set up stopwatch for recording time.
             stopwatch = new Stopwatch();
@@ -122,6 +125,14 @@ namespace Task_Time_Counter_2
             {
                 return timeOffset + stopwatch.Elapsed;
             }
+        }
+
+        /// <summary>
+        /// Sets the background fill style.
+        /// </summary>
+        public void SetFillStyle(Brush fill)
+        {
+            panelBg.Fill = fill;
         }
 
         /// <summary>
