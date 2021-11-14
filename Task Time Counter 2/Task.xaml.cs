@@ -119,6 +119,16 @@ namespace Task_Time_Counter_2
             }
         }
 
+        /// <summary>
+        /// Resets the recorded task time to zero.
+        /// </summary>
+        public void ResetTime()
+        {
+            timeOffset = TimeSpan.Zero;
+            stopwatch.Reset();
+            IsRecording = false;
+        }
+
         private void UpdateUI()
         {
             // Update button state.

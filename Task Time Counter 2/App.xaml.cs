@@ -23,6 +23,8 @@ namespace Task_Time_Counter_2
     /// </summary>
     sealed partial class App : Application
     {
+        StackPanel taskList;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,15 +41,22 @@ namespace Task_Time_Counter_2
         /// <param name="pg">The main page of the app.</param>
         public void InitializeUI(MainPage mainUI)
         {
-            object node = mainUI.FindName("TaskList");
-            if (node is StackPanel)
-            {
-                StackPanel taskList = node as StackPanel;
-                UIElementCollection tasks = taskList.Children;
+            taskList = mainUI.FindName("TaskList") as StackPanel;
+            UIElementCollection tasks = taskList.Children;
 
-                // Enable play button on first task.
-                Task t01 = tasks.ElementAt(0) as Task;
-                t01.Active = true;
+            // Enable play button on first task.
+            Task t01 = tasks.ElementAt(0) as Task;
+            t01.Active = true;
+        }
+
+        /// <summary>
+        /// Resets all task times to zero and stops the active timer.
+        /// </summary>
+        public void ClearTaskTimes()
+        {
+            foreach (Task task in taskList.Children)
+            {
+                task.ResetTime();
             }
         }
 

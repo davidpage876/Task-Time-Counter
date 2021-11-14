@@ -23,18 +23,25 @@ namespace Task_Time_Counter_2
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private App app;
+
         public MainPage()
         {
             this.InitializeComponent();
 
             // Initialize UI.
-            var app = (App)Application.Current;
+            app = (App)Application.Current;
             app.InitializeUI(this);
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void OnClearTimesTapped(object sender, TappedRoutedEventArgs e)
+        {
+            app.ClearTaskTimes();
         }
     }
 }
