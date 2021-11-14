@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,24 @@ namespace Task_Time_Counter_2
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+        }
+
+        /// <summary>
+        /// Initializes the main UI state.
+        /// </summary>
+        /// <param name="pg">The main page of the app.</param>
+        public void InitializeUI(MainPage mainUI)
+        {
+            object node = mainUI.FindName("TaskList");
+            if (node is StackPanel)
+            {
+                StackPanel taskList = node as StackPanel;
+                UIElementCollection tasks = taskList.Children;
+
+                // Enable play button on first task.
+                Task t01 = tasks.ElementAt(0) as Task;
+                t01.Active = true;
+            }
         }
 
         /// <summary>

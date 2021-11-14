@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,10 @@ namespace Task_Time_Counter_2
         public MainPage()
         {
             this.InitializeComponent();
+
+            // Initialize UI.
+            var app = (App)Application.Current;
+            app.InitializeUI(this);
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)

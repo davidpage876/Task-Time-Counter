@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,9 +20,40 @@ namespace Task_Time_Counter_2
 {
     public sealed partial class Task : UserControl
     {
+        private bool isActive = false;
+
         public Task()
         {
             this.InitializeComponent();
+
+            // Set default state.
+            Active = false;
+        }
+
+        /// <summary>
+        /// Is this task the active timer.
+        /// </summary>
+        public bool Active
+        {
+            set
+            {
+                isActive = value;
+
+                // Enable/disable active timer controls.
+                Button toTopBtn = FindName("ToTopBtn") as Button;
+                Button playPauseBtn = FindName("PlayPauseBtn") as Button;
+                if (value)
+                {
+                    toTopBtn.Visibility = Visibility.Collapsed;
+                    playPauseBtn.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    toTopBtn.Visibility = Visibility.Visible;
+                    playPauseBtn.Visibility = Visibility.Collapsed;
+                }
+            }
+            get { return isActive; }
         }
 
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
