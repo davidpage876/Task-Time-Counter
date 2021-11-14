@@ -195,8 +195,10 @@ namespace Task_Time_Counter_2
             {
                 // Save task data.
                 var taskData = new ApplicationDataCompositeValue();
-                taskData["TaskName"] = task.TaskName;
-                taskData["TaskTime"] = task.Time;
+                bool hasContent = task.HasContent;
+                taskData["TaskHasContent"] = hasContent;
+                taskData["TaskName"] = hasContent ? task.TaskName : "";
+                taskData["TaskTime"] = hasContent ? task.Time : TimeSpan.Zero;
 
                 localSettings.Values[MakeTaskName(i)] = taskData;
                 i++;
@@ -217,7 +219,8 @@ namespace Task_Time_Counter_2
                 var taskData = (ApplicationDataCompositeValue)
                     localSettings.Values[MakeTaskName(i)]; 
 
-                if (taskData == null)
+                if (taskData == null || 
+                    !taskData.ContainsKey("TaskHasContent"))
                 {
                     // Data not found.
                     break;
@@ -225,6 +228,7 @@ namespace Task_Time_Counter_2
                 else
                 {
                     // Load task data.
+                    task.HasContent = (bool)taskData["TaskHasContent"];
                     task.TaskName = (string)taskData["TaskName"];
                     task.Time = (TimeSpan)taskData["TaskTime"];
                 }
