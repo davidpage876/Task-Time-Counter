@@ -25,12 +25,14 @@ namespace Task_Time_Counter_2
         private bool isActive = false;
         private bool isRecording = false;
         private bool isEditingName = false;
+        private bool isEditingTime = false;
         private string taskName = "Unnamed task";
 
         // References.
         private Button toTopBtn;
         private Button playPauseBtn;
         private Button timeBtn;
+        private TextBox timeEdit;
         private Button nameBtn;
         private TextBox nameEdit;
 
@@ -42,6 +44,7 @@ namespace Task_Time_Counter_2
             toTopBtn = FindName("ToTopBtn") as Button;
             playPauseBtn = FindName("PlayPauseBtn") as Button;
             timeBtn = FindName("TimeBtn") as Button;
+            timeEdit = FindName("TimeEdit") as TextBox;
             nameBtn = FindName("NameBtn") as Button;
             nameEdit = FindName("NameEdit") as TextBox;
 
@@ -153,7 +156,7 @@ namespace Task_Time_Counter_2
 
         private void UpdateTimerUI()
         {
-            timeBtn.Content = FormatTime(Time);
+            timeBtn.Content = FormatTimeLong(Time);
         }
 
         private void OnTimerTick(object sender, object e)
@@ -161,10 +164,16 @@ namespace Task_Time_Counter_2
             UpdateTimerUI();
         }
 
-        private string FormatTime(TimeSpan elapsed)
+        private string FormatTimeLong(TimeSpan elapsed)
         {
             return string.Format("({0}) {1:00}:{2:00}:{3:00}.{4:0}",
                 Math.Round(elapsed.TotalHours, 1),
+                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
+        }
+
+        private string FormatTimeShort(TimeSpan elapsed)
+        {
+            return string.Format("{0:00}:{1:00}:{2:00}.{3:0}",
                 elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
         }
 
@@ -201,17 +210,76 @@ namespace Task_Time_Counter_2
             nameBtn.Focus(FocusState.Pointer);
         }
 
+        private void OpenEditTime()
+        {
+            isEditingTime = true;
+
+            // Set the edit field time to match the current text.
+            timeEdit.Text = FormatTimeShort(Time);
+
+            // Open the edit field and focus on it.
+            timeBtn.Visibility = Visibility.Collapsed;
+            timeEdit.Visibility = Visibility.Visible;
+            timeEdit.Focus(FocusState.Programmatic);
+            timeEdit.SelectAll();
+        }
+
+        private void CloseEditTime(bool apply)
+        {
+            isEditingTime = false;
+
+            // Attempt to apply change.
+            if (apply) 
+            {
+                try
+                {
+                    // Get hour, minute and seconds from input.
+                    string input = timeEdit.Text;
+                    string[] parts = input.Split(':');
+                    if (parts.Length != 3)
+                    {
+                        throw new Exception(string.Format("Invalid format: \"{0}\"", input));
+                    }
+
+                    int hour = int.Parse(parts[0]); // May throw FormatException.
+                    if (hour > 60 || hour < 0)
+                    {
+                        throw new Exception(string.Format("Hours outside of range (0-60): \"{0}\"", input));
+                    }
+
+                    int minute = int.Parse(parts[1]); // May throw FormatException.
+                    if (minute > 60 || minute < 0)
+                    {
+                        throw new Exception(string.Format("Minutes outside of range (0-60): \"{0}\"", input));
+                    }
+
+                    float seconds = float.Parse(parts[2]); // May throw FormatException.
+                    if (seconds > 60f + float.Epsilon || seconds < float.Epsilon)
+                    {
+                        throw new Exception(string.Format("Seconds outside of range (0-60): \"{0}\"", input));
+                    }
+
+                    // Update timer with new time.
+                    // Todo.
+
+                    UpdateTimerUI();
+                }
+                catch (Exception e)
+                {
+                    // Do not apply change if the input was invalid.
+                    Debug.WriteLine(e.Message);
+                }
+            }
+
+            // Close the edit field.
+            timeBtn.Visibility = Visibility.Visible;
+            timeEdit.Visibility = Visibility.Collapsed;
+
+            // Focus on the time button, without showing the keyboard focus visual.
+            timeBtn.Focus(FocusState.Pointer);
+        }
+
         private void textBlock_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TimeEdit_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TimeBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -259,6 +327,46 @@ namespace Task_Time_Counter_2
 
             // Apply editing of task name on context menu open (right click).
             CloseEditName(true);
+        }
+
+        private void OnTimeTapped(object sender, TappedRoutedEventArgs e)
+        {
+            // Enable editing of task time.
+            OpenEditTime();
+        }
+
+        private void OnTimeLostFocus(object sender, RoutedEventArgs e)
+        {
+            // Apply editing of task time on focus lost.
+            if (isEditingTime)
+            {
+                CloseEditTime(true);
+            }
+        }
+
+        private void OnTimeKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                // Cancel task time edit on Escape.
+                case Windows.System.VirtualKey.Escape:
+                    CloseEditTime(false);
+                    break;
+
+                // Apply task time edit on Enter.
+                case Windows.System.VirtualKey.Enter:
+                    CloseEditTime(true);
+                    break;
+            }
+        }
+
+        private void OnTimeContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            // Prevent default context menu from opening.
+            e.Handled = true;
+
+            // Apply editing of task time on context menu open (right click).
+            CloseEditTime(true);
         }
     }
 }
