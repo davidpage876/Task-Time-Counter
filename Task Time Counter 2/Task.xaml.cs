@@ -33,6 +33,7 @@ namespace Task_Time_Counter_2
         private string taskName = "";
         private Brush normalFill;
         private Brush focusFill;
+        private bool isPointerOver = false;
 
         // References.
         private App app;
@@ -214,8 +215,8 @@ namespace Task_Time_Counter_2
             if (hasContent)
             {
                 // Show content.
-                blank.Visibility = Visibility.Collapsed;
                 content.Visibility = Visibility.Visible;
+                UpdateBlankUI();
 
                 // Update button state.
                 const string PLAY_ICON = "";
@@ -247,9 +248,9 @@ namespace Task_Time_Counter_2
             }
             else
             {
-                // Show blank.
-                blank.Visibility = Visibility.Visible;
+                // Show blank state.
                 content.Visibility = Visibility.Collapsed;
+                UpdateBlankUI();
             }
         }
 
@@ -268,6 +269,18 @@ namespace Task_Time_Counter_2
         private void UpdateTimerUI()
         {
             timeBtn.Content = App.FormatTimeLong(Time);
+        }
+
+        private void UpdateBlankUI()
+        {
+            if (!hasContent && isPointerOver)
+            {
+                blank.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                blank.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void OnTimerTick(object sender, object e)
@@ -442,6 +455,18 @@ namespace Task_Time_Counter_2
         private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             HasContent = true;
+        }
+
+        private void OnPointerEnter(object sender, PointerRoutedEventArgs e)
+        {
+            isPointerOver = true;
+            UpdateBlankUI();
+        }
+
+        private void OnPointerExit(object sender, PointerRoutedEventArgs e)
+        {
+            isPointerOver = false;
+            UpdateBlankUI();
         }
     }
 }
