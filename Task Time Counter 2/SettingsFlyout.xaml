@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="259.529"
-    d:DesignWidth="269.593">
+    d:DesignWidth="269.593" RequestedTheme="Dark">
 
     <StackPanel x:Name="SettingsLayout">
         <CheckBox x:Name="ShowDecimalTimesToggle" Content="Show decimal times" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,20,20,20" FontSize="16" VerticalContentAlignment="Top" Checked="OnShowDecimalTimesChecked" Unchecked="OnShowDecimalTimesUnchecked"/>
