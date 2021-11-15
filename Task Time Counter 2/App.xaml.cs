@@ -345,6 +345,8 @@ namespace Task_Time_Counter_2
                 localSettings.Values[MakeTaskName(i)] = taskData;
                 i++;
             }
+
+            Debug.WriteLine("Saved");
         }
 
         /// <summary>
@@ -374,6 +376,8 @@ namespace Task_Time_Counter_2
                 if (taskData == null || 
                     !taskData.ContainsKey("TaskHasContent"))
                 {
+                    Debug.WriteLine("No data found");
+
                     // Data not found.
                     break;
                 }
@@ -387,6 +391,8 @@ namespace Task_Time_Counter_2
                 i++;
             }
             UpdateTaskListAddButton();
+
+            Debug.WriteLine("Loaded");
         }
 
         private void OnTimerTick(object sender, object e)
@@ -402,6 +408,7 @@ namespace Task_Time_Counter_2
 
         private void OnAutosaveTick(object sender, object e)
         {
+            Debug.WriteLine("Autosaving");
             SaveState();
         }
 
@@ -466,6 +473,8 @@ namespace Task_Time_Counter_2
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
+
+            Debug.WriteLine("App suspending detected. Saving...");
 
             // Save before exiting.
             SaveState();

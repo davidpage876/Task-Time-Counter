@@ -44,13 +44,11 @@ namespace Task_Time_Counter_2
         private void OnShowDecimalTimesChecked(object sender, RoutedEventArgs e)
         {
             app.ShowDecimalTimes = true;
-            app.SaveState();
         }
 
         private void OnShowDecimalTimesUnchecked(object sender, RoutedEventArgs e)
         {
             app.ShowDecimalTimes = false;
-            app.SaveState();
         }
     }
 }

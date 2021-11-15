@@ -63,5 +63,10 @@ namespace Task_Time_Counter_2
                 app.ClearTaskListLayout();
             }
         }
+
+        private void OnSettingsMenuClosed(object sender, object e)
+        {
+            app.SaveState();
+        }
     }
 }
