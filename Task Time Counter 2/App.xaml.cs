@@ -361,6 +361,7 @@ namespace Task_Time_Counter_2
             {
                 ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
             }
+            
             settings.UpdateUI();
 
             // Load task list data.
