@@ -186,10 +186,12 @@ namespace Task_Time_Counter_2
 
             // Shuffle tasks below up to replace the current task.
             Task currentTask, nextTask;
+            bool isFirst = false;
             bool isLast = false;
             for (int i = taskIndex; i < tasks.Count; i++)
             {
                 currentTask = (Task)tasks[i];
+                isFirst = i == taskIndex;
                 isLast = i == tasks.Count - 1;
 
                 if (!isLast)
@@ -198,6 +200,12 @@ namespace Task_Time_Counter_2
                     currentTask.HasContent = nextTask.HasContent;
                     currentTask.TaskName = nextTask.TaskName;
                     currentTask.Time = nextTask.Time;
+
+                    // Attempt to focus on the next task down.
+                    if (isFirst)
+                    {
+                        currentTask.Focus(FocusState.Programmatic);
+                    }
                 }
                 else
                 {
