@@ -39,7 +39,7 @@ namespace Task_Time_Counter_2
         private App app;
         private Border panel;
         private Grid blank;
-        private Grid content;
+        private Grid taskContent;
         private Button toTopBtn;
         private Button playPauseBtn;
         private Button timeBtn;
@@ -58,7 +58,7 @@ namespace Task_Time_Counter_2
             // Get control references.
             panel = FindName("Panel") as Border;
             blank = FindName("Blank") as Grid;
-            content = FindName("Content") as Grid;
+            taskContent = FindName("TaskContent") as Grid;
             toTopBtn = FindName("ToTopBtn") as Button;
             playPauseBtn = FindName("PlayPauseBtn") as Button;
             timeBtn = FindName("TimeBtn") as Button;
@@ -233,7 +233,7 @@ namespace Task_Time_Counter_2
             if (hasContent)
             {
                 // Show content.
-                content.Visibility = Visibility.Visible;
+                taskContent.Visibility = Visibility.Visible;
                 UpdateBlankUI();
 
                 // Update button state.
@@ -267,7 +267,7 @@ namespace Task_Time_Counter_2
             else
             {
                 // Show blank state.
-                content.Visibility = Visibility.Collapsed;
+                taskContent.Visibility = Visibility.Collapsed;
                 UpdateBlankUI();
             }
 

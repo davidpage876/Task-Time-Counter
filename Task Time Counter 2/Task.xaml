@@ -21,7 +21,7 @@
                 <TextBlock x:Name="AddBtnIcon" Text="&#xE710;" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44" FontSize="22" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
                 <Button x:Name="AddBtn" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Tapped="AddBtnPressed" HorizontalAlignment="Stretch"/>
             </Grid>
-            <Grid x:Name="Content" Visibility="Visible">
+            <Grid x:Name="TaskContent" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="8.5*"/>
                     <RowDefinition Height="8.5*"/>
