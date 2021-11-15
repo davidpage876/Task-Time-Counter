@@ -245,7 +245,7 @@ namespace Task_Time_Counter_2
             if (taskList != null)
             {
                 bool hasContent = false;
-                bool previousHasContent = false;
+                bool previousHasContent = true;
                 foreach (Task task in taskList.Children)
                 {
                     hasContent = task.HasContent;
