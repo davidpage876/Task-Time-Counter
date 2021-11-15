@@ -167,6 +167,20 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
+        /// Resets tasks to their default content.
+        /// </summary>
+        public void ClearTasksHaveContent()
+        {
+            // Only the first task has content.
+            int i = 0;
+            foreach (Task task in taskList.Children)
+            {
+                task.HasContent = i == 0;
+                i++;
+            }
+        }
+
+        /// <summary>
         /// Resets task colors to their starting defaults.
         /// </summary>
         public void AssignTaskColors()

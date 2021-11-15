@@ -43,6 +43,7 @@ namespace Task_Time_Counter_2
         {
             app.ClearTaskTimes();
             app.ClearTaskNames();
+            app.ClearTasksHaveContent();
         }
     }
 }
