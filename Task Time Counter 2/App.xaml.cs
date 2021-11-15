@@ -52,6 +52,16 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
+        /// Utility to check if a key indicating acceptance was pressed on a KeyPress event.
+        /// </summary>
+        public static bool IsAcceptKey(KeyRoutedEventArgs e)
+        {
+            return
+                e.Key == Windows.System.VirtualKey.Space ||
+                e.Key == Windows.System.VirtualKey.Enter;
+        }
+
+        /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>

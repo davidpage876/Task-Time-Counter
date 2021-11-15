@@ -39,11 +39,29 @@ namespace Task_Time_Counter_2
             app.ClearTaskTimes();
         }
 
+        private void OnClearTimesKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                app.ClearTaskTimes();
+            }
+        }
+
         private void OnClearAllTapped(object sender, TappedRoutedEventArgs e)
         {
             app.ClearTaskTimes();
             app.ClearTaskNames();
             app.ClearTaskListLayout();
+        }
+
+        private void OnClearAllKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                app.ClearTaskTimes();
+                app.ClearTaskNames();
+                app.ClearTaskListLayout();
+            }
         }
     }
 }

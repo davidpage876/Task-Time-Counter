@@ -388,10 +388,27 @@ namespace Task_Time_Counter_2
             IsRecording = !IsRecording;
         }
 
+        private void onPlayPauseKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                IsRecording = !IsRecording;
+            }
+        }
+
         private void OnNameTapped(object sender, TappedRoutedEventArgs e)
         {
             // Enable editing of task name.
             OpenEditName();
+        }
+
+        private void OnNameBtnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                // Enable editing of task name.
+                OpenEditName();
+            }
         }
 
         private void OnNameFocusLost(object sender, RoutedEventArgs e)
@@ -434,6 +451,15 @@ namespace Task_Time_Counter_2
             OpenEditTime();
         }
 
+        private void OnTimeBtnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                // Enable editing of task time.
+                OpenEditTime();
+            }
+        }
+
         private void OnTimeLostFocus(object sender, RoutedEventArgs e)
         {
             // Apply editing of task time on focus lost.
@@ -472,16 +498,40 @@ namespace Task_Time_Counter_2
         {
             app.ActiveTask = this;
         }
+        private void ToTopBtnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                app.ActiveTask = this;
+            }
+        }
 
         private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             HasContent = true;
         }
 
+        private void AddBtnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                HasContent = true;
+            }
+        }
+
         private void OnDeleteBtnTapped(object sender, TappedRoutedEventArgs e)
         {
             moreMenu.Hide();
             app.RemoveTask(this);
+        }
+
+        private void OnDeleteBtnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                moreMenu.Hide();
+                app.RemoveTask(this);
+            }
         }
     }
 }
