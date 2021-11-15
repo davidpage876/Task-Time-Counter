@@ -33,7 +33,6 @@ namespace Task_Time_Counter_2
         private string taskName = "";
         private Brush normalFill;
         private Brush focusFill;
-        private bool isPointerOver = false;
 
         // References.
         private App app;
@@ -273,7 +272,7 @@ namespace Task_Time_Counter_2
 
         private void UpdateBlankUI()
         {
-            if (!hasContent && isPointerOver)
+            if (!hasContent)
             {
                 blank.Visibility = Visibility.Visible;
             }
@@ -455,18 +454,6 @@ namespace Task_Time_Counter_2
         private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             HasContent = true;
-        }
-
-        private void OnPointerEnter(object sender, PointerRoutedEventArgs e)
-        {
-            isPointerOver = true;
-            UpdateBlankUI();
-        }
-
-        private void OnPointerExit(object sender, PointerRoutedEventArgs e)
-        {
-            isPointerOver = false;
-            UpdateBlankUI();
         }
     }
 }
