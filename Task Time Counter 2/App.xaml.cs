@@ -28,27 +28,35 @@ namespace Task_Time_Counter_2
         private ApplicationDataContainer localSettings;
         private DispatcherTimer dispatchTimer;
         private DispatcherTimer autosaveTimer;
+        private bool showDecimalTimes = false;
+
+        private StackPanel taskList;
         private TextBlock totalTime;
-
-        StackPanel taskList;
-
-        /// <summary>
-        /// Formats the given time in long format: "(numeric hours) HH:MM:SS.S".
-        /// </summary>
-        public static string FormatTimeLong(TimeSpan elapsed)
-        {
-            return string.Format("({0}) {1:00}:{2:00}:{3:00}.{4:0}",
-                Math.Round(elapsed.TotalHours, 1),
-                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
-        }
+        private SettingsFlyout settings;
 
         /// <summary>
-        /// Formats the given time in short format: "HH:MM:SS.S".
+        /// Formats the time in the format: "HH:MM:SS.S".
+        /// 
+        /// Optionally include decimal hour value (e.g. 1hr 30min is 1.5) in format "(#) HH:MM:SS.S"
         /// </summary>
-        public static string FormatTimeShort(TimeSpan elapsed)
+        public static string FormatTime(TimeSpan elapsed, bool showDecimalTime = false)
         {
-            return string.Format("{0:00}:{1:00}:{2:00}.{3:0}",
-                elapsed.Hours, elapsed.Minutes, elapsed.Seconds, elapsed.Milliseconds / 100);
+            string time = string.Format("{0:00}:{1:00}:{2:00}.{3:0}",
+                elapsed.Hours, 
+                elapsed.Minutes, 
+                elapsed.Seconds, 
+                elapsed.Milliseconds / 100);
+
+            if (showDecimalTime)
+            {
+                return string.Format("({0}) {1}", 
+                    Math.Round(elapsed.TotalHours, 1), 
+                    time);
+            }
+            else
+            {
+                return time;
+            }
         }
 
         /// <summary>
@@ -71,7 +79,7 @@ namespace Task_Time_Counter_2
             this.Suspending += OnSuspending;
 
             // Set up preferred window size.
-            ApplicationView.PreferredLaunchViewSize = new Size(320, 670);
+            ApplicationView.PreferredLaunchViewSize = new Size(350, 670);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
             // Get local app data store.
@@ -97,9 +105,9 @@ namespace Task_Time_Counter_2
             titleBar.ButtonInactiveBackgroundColor = windowBarColor;
 
             // Get control references.
-            totalTime = mainUI.FindName("TotalTime") as TextBlock;
             taskList = mainUI.FindName("TaskList") as StackPanel;
-            UIElementCollection tasks = taskList.Children;
+            totalTime = mainUI.FindName("TotalTime") as TextBlock;
+            settings = mainUI.FindName("SettingsMenuContents") as SettingsFlyout;
 
             // Set each task's background fill.
             AssignTaskColors();
@@ -289,6 +297,25 @@ namespace Task_Time_Counter_2
             }
         }
 
+        /// <summary>
+        /// Should we display decimal hour format (e.g. 1hr 30min is 1.5 decimal) in addition
+        /// to standard time format.
+        /// </summary>
+        public bool ShowDecimalTimes
+        {
+            set
+            {
+                showDecimalTimes = value;
+                
+                // Update task timers to reflect new format.
+                foreach (Task task in taskList.Children)
+                {
+                    task.UpdateTimerUI();
+                }
+            }
+            get { return showDecimalTimes; }
+        }
+
         private string MakeTaskName(int i)
         {
             return string.Format("Task{0}", i);
@@ -299,6 +326,11 @@ namespace Task_Time_Counter_2
         /// </summary>
         public void SaveState()
         {
+            // Save settings.
+            var settingsData = new ApplicationDataCompositeValue();
+            settingsData["ShowDecimalTimes"] = showDecimalTimes;
+            localSettings.Values["Settings"] = settingsData;
+
             // Save task list data.
             int i = 0;
             foreach (Task task in taskList.Children)
@@ -322,6 +354,15 @@ namespace Task_Time_Counter_2
         /// </summary>
         public void LoadState()
         {
+            // Load settings.
+            var settingsData = (ApplicationDataCompositeValue)
+                localSettings.Values["Settings"];
+            if (settingsData != null)
+            {
+                ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
+            }
+            settings.UpdateUI();
+
             // Load task list data.
             int i = 0;
             foreach (Task task in taskList.Children)
@@ -355,7 +396,7 @@ namespace Task_Time_Counter_2
             {
                 total += task.Time;
             }
-            totalTime.Text = FormatTimeLong(total);
+            totalTime.Text = FormatTime(total, showDecimalTimes);
         }
 
         private void OnAutosaveTick(object sender, object e)

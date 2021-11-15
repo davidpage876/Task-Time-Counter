@@ -226,7 +226,10 @@ namespace Task_Time_Counter_2
             UpdateNameUI();
         }
 
-        private void UpdateUI()
+        /// <summary>
+        /// Update all task controls based on current state.
+        /// </summary>
+        public void UpdateUI()
         {
             // Update panel background.
             panel.Background = isActive ? focusFill : normalFill;
@@ -277,7 +280,18 @@ namespace Task_Time_Counter_2
             app.UpdateTaskListAddButton();
         }
 
-        private void UpdateNameUI()
+        /// <summary>
+        /// Update timer time display based on current state.
+        /// </summary>
+        public void UpdateTimerUI()
+        {
+            timeBtn.Content = App.FormatTime(Time, app.ShowDecimalTimes);
+        }
+
+        /// <summary>
+        /// Update task name display based on current state.
+        /// </summary>
+        public void UpdateNameUI()
         {
             if (taskName == "")
             {
@@ -289,12 +303,10 @@ namespace Task_Time_Counter_2
             }
         }
 
-        private void UpdateTimerUI()
-        {
-            timeBtn.Content = App.FormatTimeLong(Time);
-        }
-
-        private void UpdateBlankUI()
+        /// <summary>
+        /// Update display of task when it has no content based on current state.
+        /// </summary>
+        public void UpdateBlankUI()
         {
             if (!hasContent && showAddContent)
             {
@@ -363,7 +375,7 @@ namespace Task_Time_Counter_2
             }
 
             // Set the edit field time to match the current text.
-            timeEdit.Text = App.FormatTimeShort(Time);
+            timeEdit.Text = App.FormatTime(Time);
 
             // Open the edit field and focus on it.
             timeBtn.Visibility = Visibility.Collapsed;
