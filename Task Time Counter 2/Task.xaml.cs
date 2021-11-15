@@ -46,6 +46,7 @@ namespace Task_Time_Counter_2
         private TextBox timeEdit;
         private Button nameBtn;
         private TextBox nameEdit;
+        private Flyout moreMenu;
 
         public Task()
         {
@@ -64,6 +65,7 @@ namespace Task_Time_Counter_2
             timeEdit = FindName("TimeEdit") as TextBox;
             nameBtn = FindName("NameBtn") as Button;
             nameEdit = FindName("NameEdit") as TextBox;
+            moreMenu = FindName("MoreMenu") as Flyout;
 
             // Set up stopwatch for recording time.
             stopwatch = new Stopwatch();
@@ -474,6 +476,12 @@ namespace Task_Time_Counter_2
         private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             HasContent = true;
+        }
+
+        private void OnDeleteBtnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            moreMenu.Hide();
+            app.RemoveTask(this);
         }
     }
 }

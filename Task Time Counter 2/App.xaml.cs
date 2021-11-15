@@ -147,6 +147,51 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
+        /// Removes the given task, shuffling tasks below it up.
+        /// </summary>
+        public void RemoveTask(Task task)
+        {
+            // Get index of task in list.
+            var tasks = taskList.Children;
+            int taskIndex = -1;
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                if (tasks[i] == task)
+                {
+                    taskIndex = i;
+                    break;
+                }
+            }
+            if (taskIndex == -1)
+            {
+                throw new Exception("Could not find task in task list.");
+            }
+
+            // Shuffle tasks below up to replace the current task.
+            Task currentTask, nextTask;
+            bool isLast = false;
+            for (int i = taskIndex; i < tasks.Count; i++)
+            {
+                currentTask = (Task)tasks[i];
+                isLast = i == tasks.Count - 1;
+
+                if (!isLast)
+                {
+                    nextTask = (Task)tasks[i + 1];
+                    currentTask.HasContent = nextTask.HasContent;
+                    currentTask.TaskName = nextTask.TaskName;
+                    currentTask.Time = nextTask.Time;
+                }
+                else
+                {
+                    currentTask.HasContent = false;
+                    currentTask.TaskName = "";
+                    currentTask.Time = TimeSpan.Zero;
+                }
+            }
+        }
+
+        /// <summary>
         /// Resets all task times to zero and stops the active timer.
         /// </summary>
         public void ClearTaskTimes()

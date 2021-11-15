@@ -29,7 +29,7 @@
                 <Button x:Name="MoreBtn" Content="&#xE712;" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.RowSpan="2" Width="34" Background="{x:Null}" Padding="0,0,0,0" FontFamily="Segoe MDL2 Assets" RenderTransformOrigin="0.5,0.5" BorderThickness="2,2,2,2" Margin="0,0,65,0" HorizontalContentAlignment="Center">
                     <Button.Flyout>
                         <Flyout x:Name="MoreMenu" Placement="Bottom">
-                            <Button x:Name="DeleteBtn" Content="Remove" FontSize="16" Background="#00000000"/>
+                            <Button x:Name="DeleteBtn" Content="Remove" FontSize="16" Background="#00000000" Tapped="OnDeleteBtnTapped"/>
                         </Flyout>
                     </Button.Flyout>
                     <Button.RenderTransform>
