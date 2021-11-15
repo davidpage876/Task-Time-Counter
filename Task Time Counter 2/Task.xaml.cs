@@ -317,6 +317,10 @@ namespace Task_Time_Counter_2
 
             // Get focus state on open.
             nameFocusState = nameBtn.FocusState;
+            if (nameFocusState == FocusState.Unfocused)
+            {
+                nameFocusState = FocusState.Programmatic;
+            }
 
             // Set the edit field text to match the current text.
             nameEdit.Text = taskName;
@@ -353,6 +357,10 @@ namespace Task_Time_Counter_2
 
             // Get focus state on open.
             timeFocusState = timeBtn.FocusState;
+            if (timeFocusState == FocusState.Unfocused)
+            {
+                timeFocusState = FocusState.Programmatic;
+            }
 
             // Set the edit field time to match the current text.
             timeEdit.Text = App.FormatTimeShort(Time);
