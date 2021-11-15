@@ -143,6 +143,9 @@ namespace Task_Time_Counter_2
                 taskList.Children.Remove(task);
                 taskList.Children.Insert(0, task);
 
+                // Attempt to focus on the task.
+                task.Focus(FocusState.Programmatic);
+
                 // Start recording time if we were previously recording.
                 task.IsRecording = wasRecording;
                 task.Active = true;
