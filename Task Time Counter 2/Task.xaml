@@ -19,7 +19,7 @@
             <Grid x:Name="Blank" Visibility="Visible" d:IsHidden="True">
                 <TextBlock x:Name="AddLabel" Text="Add Task" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" Padding="10,0,0,0"/>
                 <TextBlock x:Name="AddBtnIcon" Text="&#xE710;" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44" FontSize="22" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
-                <Button x:Name="AddBtn" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Tapped="AddBtnPressed" HorizontalAlignment="Stretch" PreviewKeyDown="AddBtnKeyDown"/>
+                <Button x:Name="AddBtn" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Tapped="AddBtnPressed" HorizontalAlignment="Stretch" PreviewKeyDown="AddBtnKeyDown" Canvas.ZIndex="10"/>
             </Grid>
             <Grid x:Name="TaskContent" Visibility="Visible">
                 <Grid.RowDefinitions>
