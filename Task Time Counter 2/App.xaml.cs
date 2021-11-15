@@ -94,10 +94,9 @@ namespace Task_Time_Counter_2
             // Set each task's background fill.
             AssignTaskColors();
 
-            // Set first (top) task as active.
-            Task t01 = tasks.ElementAt(0) as Task;
-            t01.HasContent = true;
-            t01.Active = true;
+            // Set up initial task list layout.
+            ClearTaskListLayout();
+            UpdateTaskListAddButton();
 
             // Set up dispatch timer for updating UI.
             dispatchTimer = new DispatcherTimer();
@@ -137,6 +136,9 @@ namespace Task_Time_Counter_2
                 // Start recording time if we were previously recording.
                 task.IsRecording = wasRecording;
                 task.Active = true;
+
+                // Update the "Add task" button.
+                UpdateTaskListAddButton();
             }
             get
             {
@@ -167,16 +169,37 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
-        /// Resets tasks to their default content.
+        /// Resets tasks to their default layout.
         /// </summary>
-        public void ClearTasksHaveContent()
+        public void ClearTaskListLayout()
         {
-            // Only the first task has content.
+            // Only the first task has content and is active.
             int i = 0;
             foreach (Task task in taskList.Children)
             {
-                task.HasContent = i == 0;
+                bool first = i == 0;
+                task.HasContent = first;
+                task.Active = first;
                 i++;
+            }
+            UpdateTaskListAddButton();
+        }
+
+        /// <summary>
+        /// Ensures that the "Add task" button is displayed below the bottom task slot containing content.
+        /// </summary>
+        public void UpdateTaskListAddButton()
+        {
+            if (taskList != null)
+            {
+                bool hasContent = false;
+                bool previousHasContent = false;
+                foreach (Task task in taskList.Children)
+                {
+                    hasContent = task.HasContent;
+                    task.ShowAddContent = !hasContent && previousHasContent;
+                    previousHasContent = hasContent;
+                }
             }
         }
 
@@ -248,14 +271,7 @@ namespace Task_Time_Counter_2
                 }
                 i++;
             }
-        }
-
-        private void AssignTaskFill(int index, string styleName)
-        {
-            var task = taskList.Children.ElementAt(index) as Task;
-            task.AssignFillStyle(
-                Resources[styleName] as Brush, 
-                Resources[styleName + "Focus"] as Brush);
+            UpdateTaskListAddButton();
         }
 
         private void OnTimerTick(object sender, object e)

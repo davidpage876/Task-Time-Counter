@@ -26,6 +26,7 @@ namespace Task_Time_Counter_2
         private Stopwatch stopwatch;
         private TimeSpan timeOffset = TimeSpan.Zero;
         private bool hasContent = false;
+        private bool showAddContent = false;
         private bool isActive = false;
         private bool isRecording = false;
         private bool isEditingName = false;
@@ -102,9 +103,25 @@ namespace Task_Time_Counter_2
         }
 
         /// <summary>
+        /// Should we display the "Add task" button when the task is blank.
+        /// </summary>
+        public bool ShowAddContent
+        {
+            set
+            {
+                showAddContent = value;
+                UpdateBlankUI();
+            }
+            get { return showAddContent; }
+        }
+
+        /// <summary>
         /// Is this task the active timer.
         /// 
         /// If the task is not active we stop recording to the timer.
+        /// 
+        /// Note: Use App.ActiveTask to change the active timer intelligently
+        /// bringing this task to the top and disabling the previously active task.
         /// </summary>
         public bool Active
         {
@@ -251,6 +268,9 @@ namespace Task_Time_Counter_2
                 content.Visibility = Visibility.Collapsed;
                 UpdateBlankUI();
             }
+
+            // Update "Add task" button in task list.
+            app.UpdateTaskListAddButton();
         }
 
         private void UpdateNameUI()
@@ -272,7 +292,7 @@ namespace Task_Time_Counter_2
 
         private void UpdateBlankUI()
         {
-            if (!hasContent)
+            if (!hasContent && showAddContent)
             {
                 blank.Visibility = Visibility.Visible;
             }
