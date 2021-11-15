@@ -167,6 +167,13 @@ namespace Task_Time_Counter_2
                 throw new Exception("Could not find task in task list.");
             }
 
+            // Stop recording timer if the top task is removed.
+            if (taskIndex == 0)
+            {
+                Task t = (Task)tasks[0];
+                t.IsRecording = false;
+            }
+
             // Shuffle tasks below up to replace the current task.
             Task currentTask, nextTask;
             bool isLast = false;
