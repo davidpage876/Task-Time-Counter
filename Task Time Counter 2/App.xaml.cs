@@ -92,7 +92,7 @@ namespace Task_Time_Counter_2
             UIElementCollection tasks = taskList.Children;
 
             // Set each task's background fill.
-            ResetTaskColors();
+            AssignTaskColors();
 
             // Set first (top) task as active.
             Task t01 = tasks.ElementAt(0) as Task;
@@ -169,7 +169,7 @@ namespace Task_Time_Counter_2
         /// <summary>
         /// Resets task colors to their starting defaults.
         /// </summary>
-        public void ResetTaskColors()
+        public void AssignTaskColors()
         {
             foreach (Task task in taskList.Children)
             {
