@@ -76,7 +76,7 @@ namespace Task_Time_Counter_2
         {
             // Set up preferred minimum window size.
             var appView = ApplicationView.GetForCurrentView();
-            appView.SetPreferredMinSize(new Size(290, 200));
+            appView.SetPreferredMinSize(new Size(300, 200));
 
             // Set window title bar color.
             var titleBar = appView.TitleBar;
