@@ -31,6 +31,8 @@ namespace Task_Time_Counter_2
         private bool isRecording = false;
         private bool isEditingName = false;
         private bool isEditingTime = false;
+        private FocusState nameFocusState = FocusState.Pointer;
+        private FocusState timeFocusState = FocusState.Pointer;
         private string taskName = "";
         private Brush normalFill;
         private Brush focusFill;
@@ -313,6 +315,9 @@ namespace Task_Time_Counter_2
         {
             isEditingName = true;
 
+            // Get focus state on open.
+            nameFocusState = nameBtn.FocusState;
+
             // Set the edit field text to match the current text.
             nameEdit.Text = taskName;
 
@@ -338,13 +343,16 @@ namespace Task_Time_Counter_2
             nameBtn.Visibility = Visibility.Visible;
             nameEdit.Visibility = Visibility.Collapsed;
 
-            // Focus on the name button, without showing the keyboard focus visual.
-            nameBtn.Focus(FocusState.Pointer);
+            // Focus on the name button using the original focus state we entered with.
+            nameBtn.Focus(nameFocusState);
         }
         
         private void OpenEditTime()
         {
             isEditingTime = true;
+
+            // Get focus state on open.
+            timeFocusState = timeBtn.FocusState;
 
             // Set the edit field time to match the current text.
             timeEdit.Text = App.FormatTimeShort(Time);
@@ -379,8 +387,8 @@ namespace Task_Time_Counter_2
             timeBtn.Visibility = Visibility.Visible;
             timeEdit.Visibility = Visibility.Collapsed;
 
-            // Focus on the time button, without showing the keyboard focus visual.
-            timeBtn.Focus(FocusState.Pointer);
+            // Focus on the time button using the original focus state we entered with.
+            timeBtn.Focus(timeFocusState);
         }
         
         private void onPlayPauseTapped(object sender, TappedRoutedEventArgs e)
@@ -398,6 +406,9 @@ namespace Task_Time_Counter_2
 
         private void OnNameTapped(object sender, TappedRoutedEventArgs e)
         {
+            // Prevent propogation of event to name input field.
+            e.Handled = true;
+
             // Enable editing of task name.
             OpenEditName();
         }
@@ -406,6 +417,9 @@ namespace Task_Time_Counter_2
         {
             if (App.IsAcceptKey(e))
             {
+                // Prevent propogation of event to name input field.
+                e.Handled = true;
+
                 // Enable editing of task name.
                 OpenEditName();
             }
@@ -447,6 +461,9 @@ namespace Task_Time_Counter_2
 
         private void OnTimeTapped(object sender, TappedRoutedEventArgs e)
         {
+            // Prevent propogation of event to time input field.
+            e.Handled = true;
+
             // Enable editing of task time.
             OpenEditTime();
         }
@@ -455,6 +472,9 @@ namespace Task_Time_Counter_2
         {
             if (App.IsAcceptKey(e))
             {
+                // Prevent propogation of event to time input field.
+                e.Handled = true;
+
                 // Enable editing of task time.
                 OpenEditTime();
             }
