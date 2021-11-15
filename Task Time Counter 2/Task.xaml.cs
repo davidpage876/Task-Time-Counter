@@ -509,6 +509,9 @@ namespace Task_Time_Counter_2
         private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             HasContent = true;
+            
+            // Attempt to focus on the added task content.
+            Focus(FocusState.Programmatic);
         }
 
         private void AddBtnKeyDown(object sender, KeyRoutedEventArgs e)
@@ -516,6 +519,9 @@ namespace Task_Time_Counter_2
             if (App.IsAcceptKey(e))
             {
                 HasContent = true;
+
+                // Attempt to focus on the added task content.
+                Focus(FocusState.Programmatic);
             }
         }
 
