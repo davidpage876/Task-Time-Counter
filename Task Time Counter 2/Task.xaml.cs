@@ -570,6 +570,7 @@ namespace Task_Time_Counter_2
 
         private void AddBtnPressed(object sender, TappedRoutedEventArgs e)
         {
+            // Enable task content.
             HasContent = true;
             
             // Attempt to focus on the added task content.

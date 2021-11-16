@@ -114,7 +114,6 @@ namespace Task_Time_Counter_2
 
             // Set up initial task list layout.
             ClearTaskListLayout();
-            UpdateTaskListAddButton();
 
             // Set up dispatch timer for updating UI.
             dispatchTimer = new DispatcherTimer();
@@ -254,14 +253,12 @@ namespace Task_Time_Counter_2
         /// </summary>
         public void ClearTaskListLayout()
         {
-            // Only the first task has content and is active.
-            int i = 0;
+            bool first = true;
             foreach (Task task in taskList.Children)
             {
-                bool first = i == 0;
-                task.HasContent = first;
+                task.HasContent = false;
                 task.Active = first;
-                i++;
+                first = false;
             }
             UpdateTaskListAddButton();
         }
