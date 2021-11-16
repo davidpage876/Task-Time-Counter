@@ -11,5 +11,6 @@
 
     <StackPanel x:Name="SettingsLayout">
         <CheckBox x:Name="ShowDecimalTimesToggle" Content="Show decimal times" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,20,20,20" FontSize="16" VerticalContentAlignment="Top" Checked="OnShowDecimalTimesChecked" Unchecked="OnShowDecimalTimesUnchecked"/>
+        <CheckBox x:Name="RecordOnTaskMovedToTopToggle" Content="Start task timer when moved to top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,20,20,20" FontSize="16" VerticalContentAlignment="Top" Checked="OnRecordOnTaskMovedToTopChecked" Unchecked="OnRecordOnTaskMovedToTopUnchecked" IsChecked="True"/>
     </StackPanel>
 </UserControl>

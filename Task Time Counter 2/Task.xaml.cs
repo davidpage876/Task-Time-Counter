@@ -559,12 +559,14 @@ namespace Task_Time_Counter_2
         private void ToTopBtnPressed(object sender, TappedRoutedEventArgs e)
         {
             app.ActiveTask = this;
+            IsRecording = app.RecordOnTaskMovedToTop;
         }
         private void ToTopBtnKeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (App.IsAcceptKey(e))
             {
                 app.ActiveTask = this;
+                IsRecording = app.RecordOnTaskMovedToTop;
             }
         }
 

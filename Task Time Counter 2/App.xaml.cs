@@ -29,6 +29,7 @@ namespace Task_Time_Counter_2
         private DispatcherTimer dispatchTimer;
         private DispatcherTimer autosaveTimer;
         private bool showDecimalTimes = false;
+        private bool recordOnTaskMovedToTop = true;
 
         private StackPanel taskList;
         private TextBlock totalTime;
@@ -313,6 +314,15 @@ namespace Task_Time_Counter_2
             get { return showDecimalTimes; }
         }
 
+        /// <summary>
+        /// Should we start recording when a task is moved to the top (via the "To top" button).
+        /// </summary>
+        public bool RecordOnTaskMovedToTop
+        {
+            set { recordOnTaskMovedToTop = value; }
+            get { return recordOnTaskMovedToTop; }
+        }
+
         private string MakeTaskName(int i)
         {
             return string.Format("Task{0}", i);
@@ -326,6 +336,7 @@ namespace Task_Time_Counter_2
             // Save settings.
             var settingsData = new ApplicationDataCompositeValue();
             settingsData["ShowDecimalTimes"] = showDecimalTimes;
+            settingsData["RecordOnTaskMovedToTop"] = recordOnTaskMovedToTop;
             localSettings.Values["Settings"] = settingsData;
 
             // Save task list data.
@@ -353,41 +364,49 @@ namespace Task_Time_Counter_2
         /// </summary>
         public void LoadState()
         {
-            // Load settings.
-            var settingsData = (ApplicationDataCompositeValue)
-                localSettings.Values["Settings"];
-            if (settingsData != null)
+            try
             {
-                ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
-            }
+                // Load settings.
+                var settingsData = (ApplicationDataCompositeValue)
+                    localSettings.Values["Settings"];
+                if (settingsData != null)
+                {
+                    ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
+                    recordOnTaskMovedToTop = (bool)settingsData["RecordOnTaskMovedToTop"];
+                }
             
-            settings.UpdateUI();
+                settings.UpdateUI();
 
-            // Load task list data.
-            int i = 0;
-            foreach (Task task in taskList.Children)
-            {
-                var taskData = (ApplicationDataCompositeValue)
-                    localSettings.Values[MakeTaskName(i)]; 
-
-                if (taskData == null || 
-                    !taskData.ContainsKey("TaskHasContent"))
+                // Load task list data.
+                int i = 0;
+                foreach (Task task in taskList.Children)
                 {
-                    Debug.WriteLine("No data found");
+                    var taskData = (ApplicationDataCompositeValue)
+                        localSettings.Values[MakeTaskName(i)]; 
 
-                    // Data not found.
-                    break;
+                    if (taskData == null || 
+                        !taskData.ContainsKey("TaskHasContent"))
+                    {
+                        Debug.WriteLine("No data found");
+
+                        // Data not found.
+                        break;
+                    }
+                    else
+                    {
+                        // Load task data.
+                        task.HasContent = (bool)taskData["TaskHasContent"];
+                        task.TaskName = (string)taskData["TaskName"];
+                        task.Time = (TimeSpan)taskData["TaskTime"];
+                    }
+                    i++;
                 }
-                else
-                {
-                    // Load task data.
-                    task.HasContent = (bool)taskData["TaskHasContent"];
-                    task.TaskName = (string)taskData["TaskName"];
-                    task.Time = (TimeSpan)taskData["TaskTime"];
-                }
-                i++;
+                UpdateTaskListAddButton();
             }
-            UpdateTaskListAddButton();
+            catch (Exception e)
+            {
+                Debug.WriteLine("Could not read data.");
+            }
 
             Debug.WriteLine("Loaded");
         }

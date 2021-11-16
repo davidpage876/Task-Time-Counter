@@ -22,6 +22,7 @@ namespace Task_Time_Counter_2
     {
         private App app;
         private CheckBox showDecimalTimesToggle;
+        private CheckBox recordOnTaskMovedToTopToggle;
 
         public SettingsFlyout()
         {
@@ -31,6 +32,7 @@ namespace Task_Time_Counter_2
 
             // Get control references.
             showDecimalTimesToggle = FindName("ShowDecimalTimesToggle") as CheckBox;
+            recordOnTaskMovedToTopToggle = FindName("RecordOnTaskMovedToTopToggle") as CheckBox;
         }
 
         /// <summary>
@@ -39,16 +41,39 @@ namespace Task_Time_Counter_2
         public void UpdateUI()
         {
             showDecimalTimesToggle.IsChecked = app.ShowDecimalTimes;
+            recordOnTaskMovedToTopToggle.IsChecked = app.RecordOnTaskMovedToTop;
+        }
+
+        private App AppRef
+        {
+            get 
+            {
+                if (app == null)
+                {
+                    app = (App)Application.Current;
+                }
+                return app;
+            }
         }
 
         private void OnShowDecimalTimesChecked(object sender, RoutedEventArgs e)
         {
-            app.ShowDecimalTimes = true;
+            AppRef.ShowDecimalTimes = true;
         }
 
         private void OnShowDecimalTimesUnchecked(object sender, RoutedEventArgs e)
         {
-            app.ShowDecimalTimes = false;
+            AppRef.ShowDecimalTimes = false;
+        }
+
+        private void OnRecordOnTaskMovedToTopChecked(object sender, RoutedEventArgs e)
+        {
+            AppRef.RecordOnTaskMovedToTop = true;
+        }
+
+        private void OnRecordOnTaskMovedToTopUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppRef.RecordOnTaskMovedToTop = false;
         }
     }
 }
