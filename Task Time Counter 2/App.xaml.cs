@@ -371,8 +371,10 @@ namespace Task_Time_Counter_2
                     localSettings.Values["Settings"];
                 if (settingsData != null)
                 {
-                    ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
-                    recordOnTaskMovedToTop = (bool)settingsData["RecordOnTaskMovedToTop"];
+                    if (settingsData.ContainsKey("ShowDecimalTimes"))
+                        ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
+                    if (settingsData.ContainsKey("RecordOnTaskMovedToTop"))
+                        recordOnTaskMovedToTop = (bool)settingsData["RecordOnTaskMovedToTop"];
                 }
             
                 settings.UpdateUI();
@@ -395,9 +397,12 @@ namespace Task_Time_Counter_2
                     else
                     {
                         // Load task data.
-                        task.HasContent = (bool)taskData["TaskHasContent"];
-                        task.TaskName = (string)taskData["TaskName"];
-                        task.Time = (TimeSpan)taskData["TaskTime"];
+                        if (settingsData.ContainsKey("TaskHasContent"))
+                            task.HasContent = (bool)taskData["TaskHasContent"];
+                        if (settingsData.ContainsKey("TaskName"))
+                            task.TaskName = (string)taskData["TaskName"];
+                        if (settingsData.ContainsKey("TaskTime"))
+                            task.Time = (TimeSpan)taskData["TaskTime"];
                     }
                     i++;
                 }
@@ -405,9 +410,10 @@ namespace Task_Time_Counter_2
             }
             catch (Exception e)
             {
+                // Ignore failure and continue to app.
                 Debug.WriteLine("Could not read data.");
+                return;
             }
-
             Debug.WriteLine("Loaded");
         }
 
