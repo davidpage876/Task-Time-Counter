@@ -318,12 +318,10 @@ namespace Task_Time_Counter_2
             }
         }
 
-        private void OnTimerTick(object sender, object e)
-        {
-            UpdateTimerUI();
-        }
-
-        private void OpenEditName()
+        /// <summary>
+        /// Opens the name text editor, allowing the user to change the task name.
+        /// </summary>
+        public void StartEditingName()
         {
             isEditingName = true;
 
@@ -344,7 +342,14 @@ namespace Task_Time_Counter_2
             nameEdit.SelectAll();
         }
 
-        private void CloseEditName(bool apply)
+        /// <summary>
+        /// Closes the name text editor.
+        /// </summary>
+        /// <param name="apply">
+        /// If true, changes made in the text editor are saved. 
+        /// If false, changes are discarded and the original name is unchanged.
+        /// </param>
+        public void StopEditingName(bool apply)
         {
             isEditingName = false;
 
@@ -362,8 +367,12 @@ namespace Task_Time_Counter_2
             // Focus on the name button using the original focus state we entered with.
             nameBtn.Focus(nameFocusState);
         }
-        
-        private void OpenEditTime()
+
+
+        /// <summary>
+        /// Opens the time text editor, allowing the user to change the task time.
+        /// </summary>
+        public void StartEditingTime()
         {
             isEditingTime = true;
 
@@ -384,7 +393,15 @@ namespace Task_Time_Counter_2
             timeEdit.SelectAll();
         }
 
-        private void CloseEditTime(bool apply)
+        /// <summary>
+        /// Closes the time text editor.
+        /// </summary>
+        /// <param name="apply">
+        /// If true, changes made in the text editor are saved, if they are valid.
+        /// If false, or if the input given is invalid
+        /// changes are discarded and the original time is unchanged.
+        /// </param>
+        public void StopEditingTime(bool apply)
         {
             isEditingTime = false;
 
@@ -410,7 +427,12 @@ namespace Task_Time_Counter_2
             // Focus on the time button using the original focus state we entered with.
             timeBtn.Focus(timeFocusState);
         }
-        
+
+        private void OnTimerTick(object sender, object e)
+        {
+            UpdateTimerUI();
+        }
+
         private void onPlayPauseTapped(object sender, TappedRoutedEventArgs e)
         {
             IsRecording = !IsRecording;
@@ -430,7 +452,7 @@ namespace Task_Time_Counter_2
             e.Handled = true;
 
             // Enable editing of task name.
-            OpenEditName();
+            StartEditingName();
         }
 
         private void OnNameBtnKeyDown(object sender, KeyRoutedEventArgs e)
@@ -441,7 +463,7 @@ namespace Task_Time_Counter_2
                 e.Handled = true;
 
                 // Enable editing of task name.
-                OpenEditName();
+                StartEditingName();
             }
         }
 
@@ -450,7 +472,7 @@ namespace Task_Time_Counter_2
             // Apply editing of task name on focus lost.
             if (isEditingName)
             {
-                CloseEditName(true);
+                StopEditingName(true);
             }
         }
 
@@ -460,12 +482,12 @@ namespace Task_Time_Counter_2
             {
                 // Cancel task name edit on Escape.
                 case Windows.System.VirtualKey.Escape:
-                    CloseEditName(false);
+                    StopEditingName(false);
                     break;
 
                 // Apply task name edit on Enter.
                 case Windows.System.VirtualKey.Enter:
-                    CloseEditName(true);
+                    StopEditingName(true);
                     break;
             }
         }
@@ -476,7 +498,7 @@ namespace Task_Time_Counter_2
             e.Handled = true;
 
             // Apply editing of task name on context menu open (right click).
-            CloseEditName(true);
+            StopEditingName(true);
         }
 
         private void OnTimeTapped(object sender, TappedRoutedEventArgs e)
@@ -485,7 +507,7 @@ namespace Task_Time_Counter_2
             e.Handled = true;
 
             // Enable editing of task time.
-            OpenEditTime();
+            StartEditingTime();
         }
 
         private void OnTimeBtnKeyDown(object sender, KeyRoutedEventArgs e)
@@ -496,7 +518,7 @@ namespace Task_Time_Counter_2
                 e.Handled = true;
 
                 // Enable editing of task time.
-                OpenEditTime();
+                StartEditingTime();
             }
         }
 
@@ -505,7 +527,7 @@ namespace Task_Time_Counter_2
             // Apply editing of task time on focus lost.
             if (isEditingTime)
             {
-                CloseEditTime(true);
+                StopEditingTime(true);
             }
         }
 
@@ -515,12 +537,12 @@ namespace Task_Time_Counter_2
             {
                 // Cancel task time edit on Escape.
                 case Windows.System.VirtualKey.Escape:
-                    CloseEditTime(false);
+                    StopEditingTime(false);
                     break;
 
                 // Apply task time edit on Enter.
                 case Windows.System.VirtualKey.Enter:
-                    CloseEditTime(true);
+                    StopEditingTime(true);
                     break;
             }
         }
@@ -531,7 +553,7 @@ namespace Task_Time_Counter_2
             e.Handled = true;
 
             // Apply editing of task time on context menu open (right click).
-            CloseEditTime(true);
+            StopEditingTime(true);
         }
 
         private void ToTopBtnPressed(object sender, TappedRoutedEventArgs e)
@@ -552,6 +574,9 @@ namespace Task_Time_Counter_2
             
             // Attempt to focus on the added task content.
             Focus(FocusState.Programmatic);
+
+            // Encourage user to set the task name.
+            StartEditingName();
         }
 
         private void AddBtnKeyDown(object sender, KeyRoutedEventArgs e)
