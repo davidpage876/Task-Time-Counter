@@ -452,11 +452,6 @@ namespace Task_Time_Counter_2
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    LoadState();
-                }
-
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
