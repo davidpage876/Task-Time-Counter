@@ -374,7 +374,7 @@ namespace Task_Time_Counter_2
                     if (settingsData.ContainsKey("ShowDecimalTimes"))
                         ShowDecimalTimes = (bool)settingsData["ShowDecimalTimes"];
                     if (settingsData.ContainsKey("RecordOnTaskMovedToTop"))
-                        recordOnTaskMovedToTop = (bool)settingsData["RecordOnTaskMovedToTop"];
+                        RecordOnTaskMovedToTop = (bool)settingsData["RecordOnTaskMovedToTop"];
                 }
             
                 settings.UpdateUI();
@@ -397,11 +397,11 @@ namespace Task_Time_Counter_2
                     else
                     {
                         // Load task data.
-                        if (settingsData.ContainsKey("TaskHasContent"))
+                        if (taskData.ContainsKey("TaskHasContent"))
                             task.HasContent = (bool)taskData["TaskHasContent"];
-                        if (settingsData.ContainsKey("TaskName"))
+                        if (taskData.ContainsKey("TaskName"))
                             task.TaskName = (string)taskData["TaskName"];
-                        if (settingsData.ContainsKey("TaskTime"))
+                        if (taskData.ContainsKey("TaskTime"))
                             task.Time = (TimeSpan)taskData["TaskTime"];
                     }
                     i++;
