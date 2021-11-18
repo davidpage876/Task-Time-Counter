@@ -95,7 +95,7 @@ namespace Task_Time_Counter_2
         {
             // Set up preferred minimum window size.
             var appView = ApplicationView.GetForCurrentView();
-            //appView.SetPreferredMinSize(new Size(300, 200));
+            appView.SetPreferredMinSize(new Size(300, 200));
 
             // Set window title bar color.
             var titleBar = appView.TitleBar;
@@ -470,14 +470,6 @@ namespace Task_Time_Counter_2
                     // parameter
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
-
-                // Set up preferred window size.
-                ApplicationView.PreferredLaunchViewSize = new Size(350, 670);
-                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-
-                // Set up preferred minimum window size.
-                var appView = ApplicationView.GetForCurrentView();
-                appView.SetPreferredMinSize(new Size(300, 200));
 
                 // Ensure the current window is active
                 Window.Current.Activate();
