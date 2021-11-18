@@ -40,7 +40,7 @@
                         <CompositeTransform Rotation="0"/>
                     </Button.RenderTransform>
                 </Button>
-                <Button x:Name="ToTopBtn" Content="&#xE11C;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="65" Tapped="ToTopBtnPressed" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="ToTopBtnKeyDown"/>
+                <Button x:Name="ToTopBtn" Content="&#xE11C;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="65" Tapped="ToTopBtnPressed" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="ToTopBtnKeyDown" ToolTipService.ToolTip="Move to top"/>
                 <Button x:Name="PlayPauseBtn" Content="&#xEDB5;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="65" Visibility="Collapsed" Tapped="onPlayPauseTapped" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="onPlayPauseKeyDown"/>
             </Grid>
         </Grid>
