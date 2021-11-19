@@ -560,6 +560,9 @@ namespace Task_Time_Counter_2
         {
             app.ActiveTask = this;
             IsRecording = app.RecordOnTaskMovedToTop;
+
+            // Bring this task into view.
+            (sender as Button).StartBringIntoView();
         }
         private void ToTopBtnKeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -567,6 +570,9 @@ namespace Task_Time_Counter_2
             {
                 app.ActiveTask = this;
                 IsRecording = app.RecordOnTaskMovedToTop;
+
+                // Bring this task into view.
+                (sender as Button).StartBringIntoView();
             }
         }
 
