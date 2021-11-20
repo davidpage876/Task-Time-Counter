@@ -8,7 +8,7 @@
     mc:Ignorable="d" RequestedTheme="Dark" Width="330">
 
     <StackPanel x:Name="SettingsLayout">
-        <StackPanel x:Name="AboutInfo" Margin="20,20,20,20">
+        <StackPanel x:Name="AboutInfo" Margin="20,20,20,10">
             <StackPanel x:Name="TitleRow" Orientation="Horizontal" Width="328" Margin="0,0,0,2">
                 <Image x:Name="image" Width="22" Source="/Assets/StoreLogo.png" Margin="-3,3,2,0"/>
                 <TextBlock x:Name="Title" Text="Task Time Counter" TextWrapping="Wrap" FontSize="22"/>
@@ -19,7 +19,7 @@
                 <HyperlinkButton x:Name="CreditLink" Content="davidpageinteractive.com" VerticalAlignment="Top" NavigateUri="https://davidpageinteractive.com" FontSize="13" HorizontalContentAlignment="Right" Margin="8,0,0,0" HorizontalAlignment="Stretch"/>
             </StackPanel>
         </StackPanel>
-        <ComboBox x:Name="ThemeSelector" HorizontalAlignment="Stretch" Margin="20,0,20,20" Header="Theme" SelectedIndex="0">
+        <ComboBox x:Name="ThemeSelector" HorizontalAlignment="Stretch" Margin="20,0,20,20" Header="Theme" SelectedIndex="0" Visibility="Collapsed">
             <ComboBoxItem Content="System (Dark)"/>
             <ComboBoxItem Content="Dark"/>
             <ComboBoxItem Content="Light"/>
