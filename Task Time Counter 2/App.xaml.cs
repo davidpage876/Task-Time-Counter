@@ -43,15 +43,15 @@ namespace Task_Time_Counter_2
         public static string FormatTime(TimeSpan elapsed, bool showDecimalTime = false)
         {
             string time = string.Format("{0:00}:{1:00}:{2:00}.{3:0}",
-                elapsed.Hours, 
-                elapsed.Minutes, 
-                elapsed.Seconds, 
+                elapsed.Hours,
+                elapsed.Minutes,
+                elapsed.Seconds,
                 elapsed.Milliseconds / 100);
 
             if (showDecimalTime)
             {
-                return string.Format("({0}) {1}", 
-                    Math.Round(elapsed.TotalHours, 1), 
+                return string.Format("({0}) {1}",
+                    Math.Round(elapsed.TotalHours, 1),
                     time);
             }
             else
@@ -290,7 +290,7 @@ namespace Task_Time_Counter_2
             foreach (Task task in taskList.Children)
             {
                 task.AssignFillStyle(
-                    Resources["taskBrush"] as Brush, 
+                    Resources["taskBrush"] as Brush,
                     Resources["taskFocusBrush"] as Brush);
             }
         }
@@ -304,7 +304,7 @@ namespace Task_Time_Counter_2
             set
             {
                 showDecimalTimes = value;
-                
+
                 // Update task timers to reflect new format.
                 foreach (Task task in taskList.Children)
                 {
@@ -337,7 +337,7 @@ namespace Task_Time_Counter_2
         private string MakeTaskName(int i)
         {
             return string.Format("Task{0}", i);
-        } 
+        }
 
         /// <summary>
         /// Saves app state for recall between sessions.
@@ -426,6 +426,72 @@ namespace Task_Time_Counter_2
                 return;
             }
             Debug.WriteLine("Loaded");
+        }
+
+        /// <summary>
+        /// Displays a file picker for exporting task list data to a comma-separated values (CSV) file.
+        /// 
+        /// Performs the export upon file path selected.
+        /// 
+        /// Display a message indicating success or failure.
+        /// </summary>
+        public async void ExportToCsv()
+        {
+            // Set up file picker.
+            var exportPicker = new Windows.Storage.Pickers.FileSavePicker();
+            exportPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            exportPicker.FileTypeChoices.Add("Comma-separated values (CSV)", new List<string>() { ".csv" });
+            exportPicker.SuggestedFileName = string.Format("{0} Task List", DateTime.Now.ToShortDateString());
+
+            // Show file picker.
+            StorageFile file = await exportPicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                // Write state to file.
+                CachedFileManager.DeferUpdates(file);
+                await FileIO.WriteTextAsync(file, SerializeTaskList());
+
+                Windows.Storage.Provider.FileUpdateStatus status;
+                status = await CachedFileManager.CompleteUpdatesAsync(file);
+                if (status == Windows.Storage.Provider.FileUpdateStatus.Complete)
+                {
+                    // Show success message.
+                    ContentDialog exportSuccessMsg = new ContentDialog()
+                    {
+                        Title = "Export succeeded",
+                        Content = "Task list exported",
+                        CloseButtonText = "Ok"
+                    };
+                    await exportSuccessMsg.ShowAsync();
+                    Debug.WriteLine("Task list exported");
+                }
+                else
+                {
+                    // Show error message.
+                    ContentDialog exportFailMsg = new ContentDialog()
+                    {
+                        Title = "Export failed",
+                        Content = "File not exported",
+                        CloseButtonText = "Ok"
+                    };
+                    await exportFailMsg.ShowAsync();
+                    Debug.WriteLine("File not exported");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("Export cancelled");
+            }
+        }
+
+        private string SerializeTaskList()
+        {
+            return "Test";
+        }
+
+        private void DeserializeTaskList(string data)
+        {
+
         }
 
         private void OnTimerTick(object sender, object e)

@@ -75,5 +75,18 @@ namespace Task_Time_Counter_2
         {
             AppRef.RecordOnTaskMovedToTop = false;
         }
+
+        private void ExportTapped(object sender, TappedRoutedEventArgs e)
+        {
+            app.ExportToCsv();
+        }
+
+        private void ExportKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                app.ExportToCsv();
+            }
+        }
     }
 }
