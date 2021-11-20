@@ -653,24 +653,57 @@ namespace Task_Time_Counter_2
             // Split string by comma separator.
             List<string> splits = new List<string>();
             string split = "";
+            bool escaped = false;
+            int splitStartIndex = 0;
             for (int i = 0; i < input.Length; i++)
             {
-                if (input[i] == ',')
+                // Detect escape character.
+                if (i == splitStartIndex && input[i] == '"')
                 {
-                    splits.Add(split);
-                    split = "";
+                    escaped = true;
                 }
-                else
+                else 
                 {
-                    // Ignore new lines.
-                    if (input[i] != '\r')
+                    if (escaped)
                     {
-                        split += input[i];
+                        // Search for closing escape character.
+                        if (input[i] == '"')
+                        {
+                            escaped = false;
+                        }
+                        else
+                        {
+                            // Add character to split, ignoring new lines.
+                            if (input[i] != '\r')
+                                split += input[i];
+                        }
+                    }
+                    else
+                    {
+                        // Search for comma to end split, or end of string.
+                        bool isLast = i == input.Length - 1;
+                        if (input[i] == ',' || isLast)
+                        {
+                            // Add final character to split if end of string.
+                            if (isLast && input[i] != '\r')
+                            {
+                                split += input[i];
+                            }
+
+                            splits.Add(split);
+                            split = "";
+                            splitStartIndex = i + 1;
+                            continue;
+                        }
+                        else
+                        {
+                            // Add character to split, ignoring new lines.
+                            if (input[i] != '\r')
+                                split += input[i];
+                        }
                     }
                 }
             }
-            splits.Add(split);
-
             return splits.ToArray();
         }
 
