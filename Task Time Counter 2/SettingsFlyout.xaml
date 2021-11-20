@@ -5,25 +5,28 @@
     xmlns:local="using:Task_Time_Counter_2"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignWidth="269.593" RequestedTheme="Dark">
+    mc:Ignorable="d" RequestedTheme="Dark" Width="368">
 
     <StackPanel x:Name="SettingsLayout">
-        <Button x:Name="AboutBtn" Content="About" HorizontalAlignment="Stretch" Background="#33000000" Margin="20,20,20,0" Height="37"/>
-        <Grid x:Name="ImportExportRow" Height="37" Margin="20,10,20,0">
+        <Grid x:Name="AboutInfoLayout" Height="120" Margin="20,20,20,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="207*"/>
+                <ColumnDefinition Width="121*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="Import" Background="#33000000" HorizontalAlignment="Stretch" Content="Import" HorizontalContentAlignment="Center" Padding="0,0,0,0" Margin="0,0,5,0" VerticalContentAlignment="Center" VerticalAlignment="Stretch"/>
-            <Button x:Name="Export" Background="#33000000" HorizontalAlignment="Stretch" Content="Export" HorizontalContentAlignment="Center" Padding="0,0,0,0" Margin="5,0,0,0" Grid.Column="1" VerticalAlignment="Stretch"/>
+            <TextBlock x:Name="Title" Text="Task Time Counter" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Height="27"/>
+            <TextBlock x:Name="Version" Text="v1.0.00" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,26,0,0" Opacity="0.6" Height="19"/>
+            <TextBlock x:Name="Credits" Text="© 2021 David Page" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,63,0,0" Height="19" FontSize="12"/>
+            <HyperlinkButton x:Name="CreditLink" Content="davidpageinteractive.com" Margin="0,73,0,0" VerticalAlignment="Top" NavigateUri="https://davidpageinteractive.com" Height="32" Width="159" FontSize="12" HorizontalContentAlignment="Left"/>
+            <Image x:Name="Logo" Grid.Column="1" Source="/Assets/Square150x150Logo.scale-200.png" VerticalAlignment="Top" Height="111" Stretch="Uniform"/>
         </Grid>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Stretch" Margin="20,20,20,20" Header="Theme" SelectedIndex="0">
+        <ComboBox x:Name="ThemeSelector" HorizontalAlignment="Stretch" Margin="20,0,20,20" Header="Theme" SelectedIndex="0">
             <ComboBoxItem Content="System (Dark)"/>
             <ComboBoxItem Content="Dark"/>
             <ComboBoxItem Content="Light"/>
         </ComboBox>
         <CheckBox x:Name="ShowDecimalTimesToggle" Content="Show decimal times" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,10,20,10" FontSize="16" VerticalContentAlignment="Top" Checked="OnShowDecimalTimesChecked" Unchecked="OnShowDecimalTimesUnchecked"/>
         <CheckBox x:Name="RecordOnTaskMovedToTopToggle" Content="Start task timer when moved to top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,20,20,20" FontSize="16" VerticalContentAlignment="Top" Checked="OnRecordOnTaskMovedToTopChecked" Unchecked="OnRecordOnTaskMovedToTopUnchecked" IsChecked="True"/>
+        <Button x:Name="Import" Background="#33000000" Content="Import from file (.csv)" HorizontalContentAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Height="37" HorizontalAlignment="Stretch" Margin="20,20,20,10"/>
+        <Button x:Name="Export" Background="#33000000" Content="Export to file (.csv)" HorizontalContentAlignment="Center" Padding="0,0,0,0" Height="37" HorizontalAlignment="Stretch" Margin="20,5,20,20"/>
     </StackPanel>
 </UserControl>
