@@ -469,6 +469,13 @@ namespace Task_Time_Counter_2
         private void onPlayPauseTapped(object sender, TappedRoutedEventArgs e)
         {
             IsRecording = !IsRecording;
+
+            // Highlight the task if play was pressed.
+            if (isRecording)
+            {
+                StartBringIntoView();
+                Highlight();
+            }
         }
 
         private void onPlayPauseKeyDown(object sender, KeyRoutedEventArgs e)
@@ -476,6 +483,13 @@ namespace Task_Time_Counter_2
             if (App.IsAcceptKey(e))
             {
                 IsRecording = !IsRecording;
+
+                // Highlight the task if play was pressed.
+                if (isRecording)
+                {
+                    StartBringIntoView();
+                    Highlight();
+                }
             }
         }
 
@@ -594,7 +608,7 @@ namespace Task_Time_Counter_2
             app.ActiveTask = this;
             IsRecording = app.RecordOnTaskMovedToTop;
 
-            // Bring this task into view and highlight element.
+            // Bring the active task into view and highlight it.
             app.ActiveTask.StartBringIntoView();
             app.ActiveTask.Highlight();
         }
@@ -605,7 +619,7 @@ namespace Task_Time_Counter_2
                 app.ActiveTask = this;
                 IsRecording = app.RecordOnTaskMovedToTop;
 
-                // Bring this task into view and highlight element.
+                // Bring the active task into view and highlight it.
                 app.ActiveTask.StartBringIntoView();
                 app.ActiveTask.Highlight();
             }
@@ -631,6 +645,9 @@ namespace Task_Time_Counter_2
 
                 // Attempt to focus on the added task content.
                 Focus(FocusState.Programmatic);
+
+                // Encourage user to set the task name.
+                StartEditingName();
             }
         }
 

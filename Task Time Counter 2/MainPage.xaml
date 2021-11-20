@@ -27,7 +27,7 @@
         <Grid x:Name="FooterLayout" VerticalAlignment="Bottom" Height="119">
             <TextBlock x:Name="TotalLabel" Text="Total" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,92"/>
             <TextBlock x:Name="TotalTime" Text="(7.2) 07:12:02" TextWrapping="Wrap" Margin="19,0,0,64" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Consolas" FontSize="18"/>
-            <Button x:Name="SettingsBtn" Content="&#xE713;" Background="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,13,64" FontFamily="Segoe MDL2 Assets" FontSize="20" Width="50" Height="49">
+            <Button x:Name="SettingsBtn" Content="&#xE713;" Background="#00000000" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,13,64" FontFamily="Segoe MDL2 Assets" FontSize="20" Width="50" Height="49">
                 <Button.Flyout>
                     <Flyout x:Name="SettingsMenu" Closed="OnSettingsMenuClosed">
                         <local:SettingsFlyout x:Name="SettingsMenuContents" Foreground="White"/>

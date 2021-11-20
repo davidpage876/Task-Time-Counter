@@ -419,7 +419,7 @@ namespace Task_Time_Counter_2
                 }
                 UpdateTaskListAddButton();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Ignore failure and continue to app.
                 Debug.WriteLine("Could not read data.");
