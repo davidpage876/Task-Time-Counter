@@ -323,6 +323,17 @@ namespace Task_Time_Counter_2
             get { return recordOnTaskMovedToTop; }
         }
 
+        /// <summary>
+        /// Remove highlight effects from all tasks.
+        /// </summary>
+        public void ClearTaskHighlights()
+        {
+            foreach (Task task in taskList.Children)
+            {
+                task.StopHighlight();
+            }
+        }
+
         private string MakeTaskName(int i)
         {
             return string.Format("Task{0}", i);

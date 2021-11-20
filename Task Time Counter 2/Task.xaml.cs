@@ -438,9 +438,21 @@ namespace Task_Time_Counter_2
         /// </summary>
         public void Highlight()
         {
+            // Hide any current highlight effects on other tasks.
+            app.ClearTaskHighlights();
+
             // Begin animation.
             highlightFx.Visibility = Visibility.Visible;
             highlightFxStoryboard.Begin();
+        }
+
+        /// <summary>
+        /// Stops and hides the highlight effect if visible.
+        /// </summary>
+        public void StopHighlight()
+        {
+            highlightFxStoryboard.Stop();
+            highlightFx.Visibility = Visibility.Collapsed;
         }
 
         private void OnHighlightCompleted(object sender, object e)
