@@ -88,5 +88,19 @@ namespace Task_Time_Counter_2
                 app.ExportToCsv();
             }
         }
+
+        private void ImportTapped(object sender, TappedRoutedEventArgs e)
+        {
+            app.ImportFromCsv();
+        }
+
+        private void ImportKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (App.IsAcceptKey(e))
+            {
+                app.ImportFromCsv();
+            }
+        }
+
     }
 }

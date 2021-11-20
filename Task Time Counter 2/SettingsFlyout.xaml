@@ -26,7 +26,7 @@
         </ComboBox>
         <CheckBox x:Name="ShowDecimalTimesToggle" Content="Show decimal times" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,10,20,10" FontSize="16" VerticalContentAlignment="Top" Checked="OnShowDecimalTimesChecked" Unchecked="OnShowDecimalTimesUnchecked"/>
         <CheckBox x:Name="RecordOnTaskMovedToTopToggle" Content="Start task timer when moved to top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Padding="12,3,0,0" Margin="20,10,20,20" FontSize="16" VerticalContentAlignment="Top" Checked="OnRecordOnTaskMovedToTopChecked" Unchecked="OnRecordOnTaskMovedToTopUnchecked" IsChecked="True"/>
-        <Button x:Name="Import" Background="#33000000" Content="Import from file (.csv)" HorizontalContentAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Height="37" HorizontalAlignment="Stretch" Margin="20,10,20,10"/>
+        <Button x:Name="Import" Background="#33000000" Content="Import from file (.csv)" HorizontalContentAlignment="Center" Padding="0,0,0,0" VerticalContentAlignment="Center" Height="37" HorizontalAlignment="Stretch" Margin="20,10,20,10" PreviewKeyDown="ImportKeyDown" Tapped="ImportTapped"/>
         <Button x:Name="Export" Background="#33000000" Content="Export to file (.csv)" HorizontalContentAlignment="Center" Padding="0,0,0,0" Height="37" HorizontalAlignment="Stretch" Margin="20,5,20,20" Tapped="ExportTapped" PreviewKeyDown="ExportKeyDown"/>
     </StackPanel>
 </UserControl>

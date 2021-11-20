@@ -484,14 +484,73 @@ namespace Task_Time_Counter_2
             }
         }
 
+        /// <summary>
+        /// Displays a file picker for importing task list data from a comma-separated values (CSV) file.
+        /// 
+        /// Performs the import upon file path selected.
+        /// 
+        /// Display a message indicating success or failure.
+        /// </summary>
+        public async void ImportFromCsv()
+        {
+            // Set up file picker.
+            var importPicker = new Windows.Storage.Pickers.FileOpenPicker();
+            importPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            importPicker.FileTypeFilter.Add(".csv");
+
+            // Show file picker.
+            StorageFile file = await importPicker.PickSingleFileAsync();
+            if (file != null)
+            {
+                // Read state from file.
+                string data = await FileIO.ReadTextAsync(file);
+                if (DeserializeTaskList(data))
+                {
+                    // Show success message.
+                    ContentDialog importSuccessMsg = new ContentDialog()
+                    {
+                        Title = "Import succeeded",
+                        Content = "Task list imported",
+                        CloseButtonText = "Ok"
+                    };
+                    await importSuccessMsg.ShowAsync();
+                    Debug.WriteLine("Task list imported");
+                }
+                else
+                {
+                    // Show error message.
+                    ContentDialog importFailMsg = new ContentDialog()
+                    {
+                        Title = "Import failed",
+                        Content = "File not imported",
+                        CloseButtonText = "Ok"
+                    };
+                    await importFailMsg.ShowAsync();
+                    Debug.WriteLine("File not imported");
+                }
+            }
+            else
+            {
+                Debug.WriteLine("Import cancelled");
+            }
+        }
+
+        /// <summary>
+        /// Returns task list data transformed into a string of comma separated values.
+        /// </summary>
         private string SerializeTaskList()
         {
             return "Test";
         }
 
-        private void DeserializeTaskList(string data)
+        /// <summary>
+        /// Restores task list data from a string of comma separated values.
+        /// </summary>
+        /// <returns>True if we were successful, false if the file was not valid task list data.</returns>
+        private bool DeserializeTaskList(string data)
         {
-
+            Debug.WriteLine(data);
+            return true;
         }
 
         private void OnTimerTick(object sender, object e)
