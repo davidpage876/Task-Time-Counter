@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -540,7 +541,21 @@ namespace Task_Time_Counter_2
         /// </summary>
         private string SerializeTaskList()
         {
-            return "Test";
+            const char SEP = ',';
+            StringBuilder sb = new StringBuilder();
+            
+            foreach (Task task in taskList.Children)
+            {
+                bool hasContent = task.HasContent;
+                sb.Append(hasContent);
+                sb.Append(SEP);
+                sb.Append(hasContent ? task.TaskName : "");
+                sb.Append(SEP);
+                sb.Append(hasContent ? task.Time : TimeSpan.Zero);
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
         }
 
         /// <summary>
