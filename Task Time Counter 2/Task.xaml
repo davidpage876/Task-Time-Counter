@@ -18,7 +18,7 @@
             <Grid x:Name="Blank" Visibility="Visible" d:IsHidden="True">
                 <TextBlock x:Name="AddLabel" Text="Add Task" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" TextAlignment="Center" Padding="10,0,0,0"/>
                 <TextBlock x:Name="AddBtnIcon" Text="&#xE710;" TextWrapping="Wrap" HorizontalAlignment="Right" Width="44" FontSize="22" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center"/>
-                <Button x:Name="AddBtn" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Tapped="AddBtnPressed" HorizontalAlignment="Stretch" PreviewKeyDown="AddBtnKeyDown" Canvas.ZIndex="10"/>
+                <Button x:Name="AddBtn" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="#00000000" Padding="16,4,16,5" Tapped="AddBtnPressed" HorizontalAlignment="Stretch" PreviewKeyDown="AddBtnKeyDown" Canvas.ZIndex="10"/>
             </Grid>
             <Grid x:Name="TaskContent" Visibility="Visible">
                 <Grid.RowDefinitions>
@@ -37,11 +37,11 @@
                     </Rectangle.Resources>
                 </Rectangle>
 
-                <Button x:Name="NameBtn" Content="Unnamed Task" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,100,2" FontSize="16" Padding="10,0,10,0" Background="{x:Null}" HorizontalContentAlignment="Left" Tapped="OnNameTapped" AutomationProperties.AcceleratorKey="" PreviewKeyDown="OnNameBtnKeyDown"/>
-                <Button x:Name="TimeBtn" Content="(1.5) 01:30:02" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,100,0" FontSize="18" Padding="10,0,0,5" FontFamily="Consolas" Background="{x:Null}" HorizontalContentAlignment="Left" Tapped="OnTimeTapped" Grid.Row="1" PreviewKeyDown="OnTimeBtnKeyDown"/>
+                <Button x:Name="NameBtn" Content="Unnamed Task" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,100,2" FontSize="16" Padding="10,0,10,0" Background="#00000000" HorizontalContentAlignment="Left" Tapped="OnNameTapped" AutomationProperties.AcceleratorKey="" PreviewKeyDown="OnNameBtnKeyDown"/>
+                <Button x:Name="TimeBtn" Content="(1.5) 01:30:02" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,100,0" FontSize="18" Padding="10,0,0,5" FontFamily="Consolas" Background="#00000000" HorizontalContentAlignment="Left" Tapped="OnTimeTapped" Grid.Row="1" PreviewKeyDown="OnTimeBtnKeyDown"/>
                 <TextBox x:Name="NameEdit" Text="Unnamed Task" TextWrapping="Wrap" Padding="10,5,10,0" FontSize="16" Margin="0,0,100,2" TextAlignment="Left" Visibility="Collapsed" LostFocus="OnNameFocusLost" KeyDown="OnNameKeyDown" ContextMenuOpening="OnNameContextMenuOpening" PlaceholderText="Enter new task name..."/>
                 <TextBox x:Name="TimeEdit" Text="01:30:02" TextWrapping="Wrap" Padding="10,1,10,0" Margin="0,0,100,0" FontSize="18" TextAlignment="Left" HorizontalContentAlignment="Center" Visibility="Collapsed" KeyDown="OnTimeKeyDown" LostFocus="OnTimeLostFocus" ContextMenuOpening="OnTimeContextMenuOpening" Grid.Row="1" PlaceholderText="00:00:00.0"/>
-                <Button x:Name="MoreBtn" Content="&#xE712;" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.RowSpan="2" Width="34" Background="{x:Null}" Padding="0,0,0,0" FontFamily="Segoe MDL2 Assets" RenderTransformOrigin="0.5,0.5" BorderThickness="2,2,2,2" Margin="0,0,65,0" HorizontalContentAlignment="Center">
+                <Button x:Name="MoreBtn" Content="&#xE712;" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.RowSpan="2" Width="34" Background="#00000000" Padding="0,0,0,0" FontFamily="Segoe MDL2 Assets" RenderTransformOrigin="0.5,0.5" BorderThickness="2,2,2,2" Margin="0,0,65,0" HorizontalContentAlignment="Center">
                     <Button.Flyout>
                         <Flyout x:Name="MoreMenu" Placement="Bottom">
                             <Button x:Name="DeleteBtn" Content="Remove" FontSize="16" Background="#00000000" Tapped="OnDeleteBtnTapped" PreviewKeyDown="OnDeleteBtnKeyDown"/>
@@ -51,8 +51,8 @@
                         <CompositeTransform Rotation="0"/>
                     </Button.RenderTransform>
                 </Button>
-                <Button x:Name="ToTopBtn" Content="&#xE11C;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="65" Tapped="ToTopBtnPressed" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="ToTopBtnKeyDown" ToolTipService.ToolTip="Move to top"/>
-                <Button x:Name="PlayPauseBtn" Content="&#xEDB5;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="{x:Null}" Padding="16,4,16,5" Width="65" Visibility="Collapsed" Tapped="onPlayPauseTapped" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="onPlayPauseKeyDown"/>
+                <Button x:Name="ToTopBtn" Content="&#xE11C;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="#00000000" Padding="16,4,16,5" Width="65" Tapped="ToTopBtnPressed" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="ToTopBtnKeyDown" ToolTipService.ToolTip="Move to top"/>
+                <Button x:Name="PlayPauseBtn" Content="&#xEDB5;" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" VerticalAlignment="Stretch" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="24" Background="#00000000" Padding="16,4,16,5" Width="65" Visibility="Collapsed" Tapped="onPlayPauseTapped" Grid.RowSpan="2" HorizontalAlignment="Right" PreviewKeyDown="onPlayPauseKeyDown"/>
             </Grid>
         </Grid>
     </Border>
