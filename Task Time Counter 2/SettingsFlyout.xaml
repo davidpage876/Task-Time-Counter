@@ -8,13 +8,13 @@
     mc:Ignorable="d" RequestedTheme="Dark" Width="330">
 
     <StackPanel x:Name="SettingsLayout">
-        <StackPanel x:Name="AboutInfo" Height="80" Margin="20,20,20,10">
+        <StackPanel x:Name="AboutInfo" Margin="20,20,20,20">
             <StackPanel x:Name="TitleRow" Orientation="Horizontal" Width="328" Margin="0,0,0,2">
                 <Image x:Name="image" Width="22" Source="/Assets/StoreLogo.png" Margin="-3,3,2,0"/>
                 <TextBlock x:Name="Title" Text="Task Time Counter" TextWrapping="Wrap" FontSize="22"/>
                 <TextBlock x:Name="Version" Text="v1.0.00" TextWrapping="Wrap" Opacity="0.6" Width="43" VerticalAlignment="Center" Margin="8,8,0,0" FontSize="14"/>
             </StackPanel>
-            <StackPanel x:Name="CreditsRow" Orientation="Horizontal" Width="328">
+            <StackPanel x:Name="CreditsRow" Orientation="Horizontal" Width="328" Margin="0,0,0,20">
                 <TextBlock x:Name="Credits" TextWrapping="Wrap" FontSize="13" Padding="0,6,0,7" VerticalAlignment="Top" Text="David Page© 2021"/>
                 <HyperlinkButton x:Name="CreditLink" Content="davidpageinteractive.com" VerticalAlignment="Top" NavigateUri="https://davidpageinteractive.com" FontSize="13" HorizontalContentAlignment="Right" Margin="8,0,0,0" HorizontalAlignment="Stretch"/>
             </StackPanel>
