@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
+using Windows.ApplicationModel;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -23,6 +24,7 @@ namespace Task_Time_Counter_2
         private App app;
         private CheckBox showDecimalTimesToggle;
         private CheckBox recordOnTaskMovedToTopToggle;
+        private TextBlock versionLabel;
 
         public SettingsFlyout()
         {
@@ -33,6 +35,9 @@ namespace Task_Time_Counter_2
             // Get control references.
             showDecimalTimesToggle = FindName("ShowDecimalTimesToggle") as CheckBox;
             recordOnTaskMovedToTopToggle = FindName("RecordOnTaskMovedToTopToggle") as CheckBox;
+            versionLabel = FindName("Version") as TextBlock;
+
+            UpdateVersion();
         }
 
         /// <summary>
@@ -42,6 +47,14 @@ namespace Task_Time_Counter_2
         {
             showDecimalTimesToggle.IsChecked = app.ShowDecimalTimes;
             recordOnTaskMovedToTopToggle.IsChecked = app.RecordOnTaskMovedToTop;
+        }
+
+        private void UpdateVersion()
+        {
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+            versionLabel.Text = string.Format("v{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
         }
 
         private App AppRef
