@@ -564,7 +564,71 @@ namespace Task_Time_Counter_2
         /// <returns>True if we were successful, false if the file was not valid task list data.</returns>
         private bool DeserializeTaskList(string data)
         {
-            Debug.WriteLine(data);
+            // Pre-validation steps.
+            Debug.WriteLine("Performing deserialization pre-validation");
+            if (data == "")
+            {
+                Debug.WriteLine("Deserialize failed: Data string empty");
+                return false;
+            }    
+            
+            string[] rows = data.Split('\n');
+            int minExpectedRows = taskList.Children.Count;
+            if (rows.Length < minExpectedRows)
+            {
+                Debug.WriteLine(string.Format(
+                    "Deserialize failed: Incorrect number of rows (expected {0}, got {1})", 
+                    minExpectedRows, rows.Length));
+                return false;
+            }
+
+            // Shrink the array to not include additional lines.
+            Array.Resize(ref rows, minExpectedRows);
+
+            const char SEP = ',';
+            const int MIN_EXPECTED_COLS = 3;
+            int rowIndex = 1;
+            int lastIndex = rows.Length;
+            foreach (string row in rows)
+            {
+                string[] cols = row.Split(SEP);
+                if (cols.Length < MIN_EXPECTED_COLS)
+                {
+                    Debug.WriteLine(string.Format(
+                        "Deserialize failed: Incorrect number of columns in row {0} (expected {1}, got {2})",
+                        rowIndex, MIN_EXPECTED_COLS, cols.Length));
+                    return false;
+                }
+
+                bool hasContent;
+                if (!bool.TryParse(cols[0], out hasContent))
+                {
+                    Debug.WriteLine("Deserialize failed: Column 1 row {0} not a valid boolean", rowIndex);
+                    return false;
+                }
+
+                TimeSpan taskTime;
+                if (!TimeSpan.TryParse(cols[2], out taskTime))
+                {
+                    Debug.WriteLine("Deserialize failed: Column 3 row {0} not a valid timespan", rowIndex);
+                    return false;
+                }
+                rowIndex++;
+            }
+
+            // Validation successful. We can now proceed with deserialization with confidence.
+            Debug.WriteLine("Deserialization validation successful");
+            int i = 0;
+            foreach (string row in rows)
+            {
+                string[] cols = row.Split(SEP);
+                Task task = taskList.Children[i] as Task;
+                task.HasContent = bool.Parse(cols[0]);
+                task.TaskName = cols[1];
+                task.Time = TimeSpan.Parse(cols[2]);
+                i++;
+            }
+            Debug.WriteLine("Deserialization completed");
             return true;
         }
 
