@@ -549,7 +549,7 @@ namespace Task_Time_Counter_2
                 bool hasContent = task.HasContent;
                 sb.Append(hasContent);
                 sb.Append(SEP);
-                sb.Append(hasContent ? task.TaskName : "");
+                sb.Append(hasContent ? EncodeEscapeString(task.TaskName) : "");
                 sb.Append(SEP);
                 sb.Append(hasContent ? task.Time : TimeSpan.Zero);
                 sb.AppendLine();
@@ -585,13 +585,12 @@ namespace Task_Time_Counter_2
             // Shrink the array to not include additional lines.
             Array.Resize(ref rows, minExpectedRows);
 
-            const char SEP = ',';
             const int MIN_EXPECTED_COLS = 3;
             int rowIndex = 1;
             int lastIndex = rows.Length;
             foreach (string row in rows)
             {
-                string[] cols = row.Split(SEP);
+                string[] cols = SplitEscaped(row);
                 if (cols.Length < MIN_EXPECTED_COLS)
                 {
                     Debug.WriteLine(string.Format(
@@ -621,7 +620,7 @@ namespace Task_Time_Counter_2
             int i = 0;
             foreach (string row in rows)
             {
-                string[] cols = row.Split(SEP);
+                string[] cols = SplitEscaped(row);
                 Task task = taskList.Children[i] as Task;
                 task.HasContent = bool.Parse(cols[0]);
                 task.TaskName = cols[1];
@@ -630,6 +629,49 @@ namespace Task_Time_Counter_2
             }
             Debug.WriteLine("Deserialization completed");
             return true;
+        }
+
+        private string EncodeEscapeString(string s)
+        {
+            // Escape double-quotes with the double-quotes printed twice.
+            if (s.Contains('"'))
+            {
+                s = s.Replace("\"", "\"\"");
+            }
+
+            // Escape separator characters by putting the string inside double-quotes.
+            if (s.Contains(','))
+            {
+                s = "\"" + s + "\"";
+            }
+
+            return s;
+        }
+
+        private string[] SplitEscaped(string input)
+        {
+            // Split string by comma separator.
+            List<string> splits = new List<string>();
+            string split = "";
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == ',')
+                {
+                    splits.Add(split);
+                    split = "";
+                }
+                else
+                {
+                    // Ignore new lines.
+                    if (input[i] != '\r')
+                    {
+                        split += input[i];
+                    }
+                }
+            }
+            splits.Add(split);
+
+            return splits.ToArray();
         }
 
         private void OnTimerTick(object sender, object e)
