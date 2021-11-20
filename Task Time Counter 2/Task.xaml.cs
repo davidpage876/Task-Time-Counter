@@ -645,6 +645,9 @@ namespace Task_Time_Counter_2
 
                 // Attempt to focus on the added task content.
                 Focus(FocusState.Programmatic);
+
+                // Encourage user to set the task name.
+                StartEditingName();
             }
         }
 
