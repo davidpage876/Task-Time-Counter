@@ -565,7 +565,7 @@ namespace Task_Time_Counter_2
         private bool DeserializeTaskList(string data)
         {
             // Pre-validation steps.
-            Debug.WriteLine("Performing deserialization pre-validation");
+            //Debug.WriteLine("Performing deserialization pre-validation");
             if (data == "")
             {
                 Debug.WriteLine("Deserialize failed: Data string empty");
@@ -616,7 +616,7 @@ namespace Task_Time_Counter_2
             }
 
             // Validation successful. We can now proceed with deserialization with confidence.
-            Debug.WriteLine("Deserialization validation successful");
+            //Debug.WriteLine("Deserialization validation successful");
             int i = 0;
             foreach (string row in rows)
             {
@@ -627,7 +627,7 @@ namespace Task_Time_Counter_2
                 task.Time = TimeSpan.Parse(cols[2]);
                 i++;
             }
-            Debug.WriteLine("Deserialization completed");
+            //Debug.WriteLine("Deserialization completed");
             return true;
         }
 
@@ -655,51 +655,64 @@ namespace Task_Time_Counter_2
             string split = "";
             bool escaped = false;
             int splitStartIndex = 0;
+            char c;
+            bool hasNext = false;
             for (int i = 0; i < input.Length; i++)
             {
-                // Detect escape character.
-                if (i == splitStartIndex && input[i] == '"')
+                c = input[i];
+                hasNext = i + 1 < input.Length;
+
+                // Detect escape character (double-quote).
+                if (i == splitStartIndex && c == '"')
                 {
                     escaped = true;
                 }
+
+                // Detect escape of escape character (two double-quotes).
+                else if (c == '"' && hasNext && input[i + 1] == '"')
+                {
+                    split += '"';
+                    i++;
+                }
+
+                // Detect other characters.
                 else 
                 {
                     if (escaped)
                     {
                         // Search for closing escape character.
-                        if (input[i] == '"')
+                        if (c == '"')
                         {
                             escaped = false;
                         }
                         else
                         {
                             // Add character to split, ignoring new lines.
-                            if (input[i] != '\r')
-                                split += input[i];
+                            if (c != '\r')
+                                split += c;
                         }
                     }
                     else
                     {
                         // Search for comma to end split, or end of string.
                         bool isLast = i == input.Length - 1;
-                        if (input[i] == ',' || isLast)
+                        if (c == ',' || isLast)
                         {
                             // Add final character to split if end of string.
-                            if (isLast && input[i] != '\r')
+                            if (isLast && c != '\r')
                             {
-                                split += input[i];
+                                split += c;
                             }
 
                             splits.Add(split);
                             split = "";
                             splitStartIndex = i + 1;
-                            continue;
                         }
                         else
                         {
                             // Add character to split, ignoring new lines.
-                            if (input[i] != '\r')
-                                split += input[i];
+                            if (c != '\r')
+                                split += c;
                         }
                     }
                 }
