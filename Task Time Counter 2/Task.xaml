@@ -8,7 +8,6 @@
     mc:Ignorable="d" Margin="6,2,10,2" Background="{StaticResource taskBrush}" RequestedTheme="Dark">
 
     <Border x:Name="Panel" Background="{StaticResource taskBrush}">
-
         <Grid x:Name="Layout">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -26,6 +25,18 @@
                     <RowDefinition Height="8.5*"/>
                     <RowDefinition Height="8.5*"/>
                 </Grid.RowDefinitions>
+
+                <Rectangle x:Name="HighlightFx" Grid.RowSpan="2" Fill="#FFFFFFFF" Visibility="Collapsed">
+                    <Rectangle.Resources>
+                        <Storyboard x:Name="HighlightFxStoryboard" Completed="OnHighlightCompleted">
+                            <ColorAnimation Storyboard.TargetName="HighlightFx"
+                                            Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                            From="{StaticResource taskHighlightColor}" To="Transparent"
+                                            Duration="0:0:1.2" />
+                        </Storyboard>
+                    </Rectangle.Resources>
+                </Rectangle>
+
                 <Button x:Name="NameBtn" Content="Unnamed Task" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,100,2" FontSize="16" Padding="10,0,10,0" Background="{x:Null}" HorizontalContentAlignment="Left" Tapped="OnNameTapped" AutomationProperties.AcceleratorKey="" PreviewKeyDown="OnNameBtnKeyDown"/>
                 <Button x:Name="TimeBtn" Content="(1.5) 01:30:02" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,100,0" FontSize="18" Padding="10,0,0,5" FontFamily="Consolas" Background="{x:Null}" HorizontalContentAlignment="Left" Tapped="OnTimeTapped" Grid.Row="1" PreviewKeyDown="OnTimeBtnKeyDown"/>
                 <TextBox x:Name="NameEdit" Text="Unnamed Task" TextWrapping="Wrap" Padding="10,5,10,0" FontSize="16" Margin="0,0,100,2" TextAlignment="Left" Visibility="Collapsed" LostFocus="OnNameFocusLost" KeyDown="OnNameKeyDown" ContextMenuOpening="OnNameContextMenuOpening" PlaceholderText="Enter new task name..."/>

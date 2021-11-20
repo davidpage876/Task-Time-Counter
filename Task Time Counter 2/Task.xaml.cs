@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Media.Animation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -36,6 +37,8 @@ namespace Task_Time_Counter_2
         private string taskName = "";
         private Brush normalFill;
         private Brush focusFill;
+        private Rectangle highlightFx;
+        private Storyboard highlightFxStoryboard;
 
         // References.
         private App app;
@@ -68,6 +71,8 @@ namespace Task_Time_Counter_2
             nameBtn = FindName("NameBtn") as Button;
             nameEdit = FindName("NameEdit") as TextBox;
             moreMenu = FindName("MoreMenu") as Flyout;
+            highlightFx = FindName("HighlightFx") as Rectangle;
+            highlightFxStoryboard = FindName("HighlightFxStoryboard") as Storyboard;
 
             // Set up stopwatch for recording time.
             stopwatch = new Stopwatch();
@@ -428,6 +433,22 @@ namespace Task_Time_Counter_2
             timeBtn.Focus(timeFocusState);
         }
 
+        /// <summary>
+        /// Displays a short animation to visually highlight the task.
+        /// </summary>
+        public void Highlight()
+        {
+            // Begin animation.
+            highlightFx.Visibility = Visibility.Visible;
+            highlightFxStoryboard.Begin();
+        }
+
+        private void OnHighlightCompleted(object sender, object e)
+        {
+            // Hide highlight effect on animation complete.
+            highlightFx.Visibility = Visibility.Collapsed;
+        }
+
         private void OnTimerTick(object sender, object e)
         {
             UpdateTimerUI();
@@ -561,8 +582,9 @@ namespace Task_Time_Counter_2
             app.ActiveTask = this;
             IsRecording = app.RecordOnTaskMovedToTop;
 
-            // Bring this task into view.
-            (sender as Button).StartBringIntoView();
+            // Bring this task into view and highlight element.
+            app.ActiveTask.StartBringIntoView();
+            app.ActiveTask.Highlight();
         }
         private void ToTopBtnKeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -571,8 +593,9 @@ namespace Task_Time_Counter_2
                 app.ActiveTask = this;
                 IsRecording = app.RecordOnTaskMovedToTop;
 
-                // Bring this task into view.
-                (sender as Button).StartBringIntoView();
+                // Bring this task into view and highlight element.
+                app.ActiveTask.StartBringIntoView();
+                app.ActiveTask.Highlight();
             }
         }
 
