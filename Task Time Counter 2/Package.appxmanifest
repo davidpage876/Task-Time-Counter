@@ -9,7 +9,7 @@
   <Identity
     Name="24810DavidPageInteractive.TaskTimeCounter"
     Publisher="CN=97F6C0CA-0A31-473D-8C99-C7533DEA0555"
-    Version="1.0.32.0" />
+    Version="1.0.34.0" />
 
   <mp:PhoneIdentity PhoneProductId="7182e0f6-856f-4c39-aa12-6d32b7c3b8f7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
