@@ -52,13 +52,24 @@ namespace Task_Time_Counter_2
             if (showDecimalTime)
             {
                 return string.Format("({0}) {1}",
-                    Math.Round(elapsed.TotalHours, 1),
+                    RoundToLegalBillingIncrement(elapsed),
                     time);
             }
             else
             {
                 return time;
             }
+        }
+
+        private static decimal RoundToLegalBillingIncrement(TimeSpan timeWorked)
+        {
+            decimal totalMinutes = (decimal)timeWorked.TotalMinutes;
+            if (totalMinutes <= 0)
+            {
+                return 0.0m;
+            }
+            decimal billableTenths = Math.Ceiling(totalMinutes / 6.0m) / 10.0m;
+            return Math.Max(billableTenths, 0.1m);
         }
 
         /// <summary>
