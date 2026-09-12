@@ -16,7 +16,7 @@
             </StackPanel>
             <StackPanel x:Name="CreditsRow" Orientation="Horizontal" Width="328" Margin="0,0,0,20">
                 <TextBlock x:Name="Credits" TextWrapping="Wrap" FontSize="13" Padding="0,6,0,7" VerticalAlignment="Top" Text="David Page ©2021"/>
-                <HyperlinkButton x:Name="CreditLink" Content="davidpageinteractive.com" VerticalAlignment="Top" NavigateUri="https://davidpageinteractive.com" FontSize="13" HorizontalContentAlignment="Right" Margin="8,0,0,0" HorizontalAlignment="Stretch"/>
+                <HyperlinkButton x:Name="CreditLink" Content="davidpage876@gmail.com" VerticalAlignment="Top" NavigateUri="mailto:davidpage876@gmail.com" FontSize="13" HorizontalContentAlignment="Right" Margin="8,0,0,0" HorizontalAlignment="Stretch"/>
             </StackPanel>
         </StackPanel>
         <ComboBox x:Name="ThemeSelector" HorizontalAlignment="Stretch" Margin="20,0,20,20" Header="Theme" SelectedIndex="0" Visibility="Collapsed">
