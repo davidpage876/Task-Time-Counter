@@ -12,6 +12,7 @@
         <!-- Task brushes -->
         <AcrylicBrush x:Key="taskBrush" TintColor="#FF232323" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF232323"/>
         <AcrylicBrush x:Key="taskFocusBrush" TintColor="#FF595959" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF595959"/>
+        <AcrylicBrush x:Key="taskRunningBrush" TintColor="#FF4b712e" TintOpacity="0.75" BackgroundSource="HostBackdrop" FallbackColor="#FF4b712e"/>
         <Color x:Key="taskHighlightColor">#40FFFFFF</Color>
 
     </Application.Resources>

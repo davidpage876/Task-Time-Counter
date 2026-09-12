@@ -37,6 +37,7 @@ namespace Task_Time_Counter_2
         private string taskName = "";
         private Brush normalFill;
         private Brush focusFill;
+        private Brush runningFill;
         private Rectangle highlightFx;
         private Storyboard highlightFxStoryboard;
 
@@ -91,10 +92,11 @@ namespace Task_Time_Counter_2
         /// 
         /// Focus is used when the task is active, normal otherwise.
         /// </summary>
-        public void AssignFillStyle(Brush normal, Brush focus)
+        public void AssignFillStyle(Brush normal, Brush focus, Brush running)
         {
             normalFill = normal;
             focusFill = focus;
+            runningFill = running;
             UpdateUI();
         }
 
@@ -237,7 +239,14 @@ namespace Task_Time_Counter_2
         public void UpdateUI()
         {
             // Update panel background.
-            panel.Background = isActive ? focusFill : normalFill;
+            if (isActive)
+            {
+                panel.Background = isRecording ? runningFill : focusFill;
+            }
+            else
+            {
+                panel.Background = normalFill;
+            }
 
             // Update content state.
             if (hasContent)

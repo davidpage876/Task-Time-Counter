@@ -292,7 +292,8 @@ namespace Task_Time_Counter_2
             {
                 task.AssignFillStyle(
                     Resources["taskBrush"] as Brush,
-                    Resources["taskFocusBrush"] as Brush);
+                    Resources["taskFocusBrush"] as Brush,
+                    Resources["taskRunningBrush"] as Brush);
             }
         }
 
